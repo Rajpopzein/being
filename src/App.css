@@ -1,38 +1,136 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loginMain{
+  background: url("./resource/Login_bg1.png") no-repeat center center;
+  width: 100vw;
+  height: 100vh;
+  /* position: relative; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.mainCard{
+  /* position: absolute; */
+  top: 5.5rem;
+  width: 90rem !important;
+  height: 43rem !important;
+  border-color: none;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+}
+.sideImage{
+  width: 38rem;
+  height: 43rem;
+  position: relative;
+}
+.column2{
+  padding-left: 5rem;  
+}
+.cardrow{
+  padding: 0px !important;
 }
 
-.App-link {
-  color: #61dafb;
+.formCol{
+  text-align: center;
+  padding: 6rem;
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.Form form{
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+}
+
+.Form form label{
+  position: relative;
+  right: 10rem;
+
+}
+
+.password,.username {
+  width: 25rem;
+  border: none;
+  margin-left: 4rem;
+  background-color: #f1f1f1;
+  height: 3rem;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.rememberme{
+  display: flex;
+  text-align: center;
+  margin-left: 4rem;
+}
+.rememberme p{
+  margin-top: 1rem;
+  font-weight: bold;
+  
+}
+.rememberme .check{
+  margin-right: 12px;
+  width: 1rem;
+  margin-left: 5px;
+}
+.lgn-btn{
+  width: 25rem;
+  margin-left: 4rem;
+  border-radius: 20px;
+  height: 45px;
+  border: none;
+  color: #fff;
+  /* background-color: ; */
+  background: #ff0099; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #9527d4, #d577f0); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #9527d4, #d577f0);
+  margin-bottom: 1rem;
+}
+.formCol h3{
+ padding:1rem;
+}
+.para {
+  color: #cac9c8;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.link{
+  text-decoration: none;
+  color: #cac9c9;
+  font-size: 1.1rem;
+}
+.petsale{
+  width: 10rem;
+  position: absolute;
+  z-index: 1;
+  color: #fff;
+  font-size: 56px;
+  top: 4.5rem;
+  left: 54rem;
+}
+.petsale span{
+  color: #f7ff0f;
+}
+.bottom-txt-img{
+  z-index: 1;
+  position: absolute;
+  bottom:6rem;
+  width: 17rem;
+  color: #fff;
+  left: 54rem;
+  font-size: 20px;
+}
+
+@media only screen and (max-width:1426px) {
+  .column2{
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
-  }
+    .password,.username {
+      margin-left: 25rem;
+    
+    }
+    .lgn-btn{
+      margin-left: 25rem;
+    }
+    .rememberme{
+      margin-left: 25rem;
+    }
+    
 }
