@@ -4,7 +4,6 @@ import {createSlice} from '@reduxjs/toolkit'
 const conterSlice = createSlice({
         name:'userData',
         initialState : {
-            // datas : null
             datas: []
         },
         reducers:{

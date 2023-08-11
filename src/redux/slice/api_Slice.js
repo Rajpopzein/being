@@ -13,7 +13,7 @@ export const fetchuser = createAsyncThunk('api/fetchuserdata', async()=>{
 const apiSlice = createSlice({
     name:'ApiCall',
     initialState:{
-        userdata:null,
+        userdata: null,
         loading: 'idle',
         error: null,
     },
@@ -21,13 +21,12 @@ const apiSlice = createSlice({
 
     extraReducers:(builder) => {
         builder.addCase(fetchuser.pending, (state)=> {
-            // console.log(state,"pppp")
             state.loading = 'pending';
         })
         .addCase(fetchuser.fulfilled, (state, action)=>{
             state.loading = 'idle';
-            state.userdata = action.payload;
-            // console.log(action.payload,"ppp")
+            state.userdata = action.payload.data[0];
+            console.log(state.userdata,"ppp")
         })
         .addCase(fetchuser.rejected, (state, action) => {
             state.loading = 'idle';

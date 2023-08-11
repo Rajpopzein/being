@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import reduser from '../slice/userslice'
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-// import api_Slice from "../slice/api_Slice";
+import api_Slice from "../slice/api_Slice";
 
 const persistconfig = {
     key: 'root',
@@ -15,8 +15,8 @@ const persistreducer = persistReducer(persistconfig, reduser)
 
 const store = configureStore({
     reducer:{
-        userdetails: persistreducer
-        // dashapi: api_Slice
+        userdetails: persistreducer,
+        dashapi : api_Slice
 
     }
 })

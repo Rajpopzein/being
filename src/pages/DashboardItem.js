@@ -21,13 +21,15 @@ const DashboardItem = () => {
   const fullname = userdata?.datas[0]?.firstname + " " + userdata?.datas[0]?.lastname;
   const [dashboardData, setDashboardData] = useState([]);
 
-  // const dispatch = useDispatch()
-  // const userdatass = useSelector((state)=> state?.api?.userdata)
-  // const errordatas = useSelector((state)=>  state?.api?.error)
+  const dispatch = useDispatch()
+  const userdatass = useSelector((state)=> state?.dashapi)
+  const errordatas = useSelector((state)=>  state?.api?.error)
 
-  // useEffect(()=>{
-  //   console.log(userdatass,"ppp")
-  // },[])
+
+  useEffect(()=>{
+    dispatch(fetchuser())
+    
+  },[])
 
   
   useEffect(() => {
@@ -41,6 +43,7 @@ const DashboardItem = () => {
   // console.log("datasss", userdatass)
   // console.log("errorss", errordatas)
   console.log("dashboarddata", dashboardData?.data?.data[0]);
+  console.log(userdatass,"pppo")
   return (
     <div>
       <div className="datesec">
