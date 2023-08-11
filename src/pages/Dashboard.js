@@ -23,6 +23,7 @@ import {useNavigate } from 'react-router-dom';
 import pawimg from '../resource/Web - Menu/pawprint.png'
 import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
 import DashboardItem from './DashboardItem';
+import axios from 'axios';
 
 
 
@@ -77,6 +78,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+
+  
+
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+        navigate('/')
+    }
+    
+  },[])
     
     const [pageselector, setPageSelector] = useState(0)
 
@@ -86,11 +96,7 @@ export default function PersistentDrawerLeft() {
 
     console.log("data", data)
 
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
-        navigate('/')
-    }
-  },[])
+ 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -101,6 +107,8 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />

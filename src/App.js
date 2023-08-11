@@ -8,6 +8,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function App() {
+
+  useEffect(()=>{
+    if(localStorage.getItem("token"))
+    {
+      navigate('/Dashboard')
+    }
+  },[])
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -54,6 +62,7 @@ function App() {
   };
 
   // const reddata = useSelector((state) => state.userdetails)
+
 
   const handlesubmit = (e) => {
     e.preventDefault();

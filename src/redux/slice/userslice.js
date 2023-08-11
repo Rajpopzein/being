@@ -4,13 +4,12 @@ import {createSlice} from '@reduxjs/toolkit'
 const conterSlice = createSlice({
         name:'userData',
         initialState : {
-            datas : null
+            // datas : null
+            datas: []
         },
         reducers:{
            userdatass:(state, action)=>{
-            const cred = action.payload
-            const data = {...state.datas, ...cred}
-            state.datas = data
+            state.datas.push(action.payload)
            }
         }
         

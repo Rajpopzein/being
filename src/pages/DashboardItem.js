@@ -10,11 +10,37 @@ import card3 from "../resource/Web - Menu/posts_3.png";
 import card4 from "../resource/Web - Menu/posts_4.png";
 import Avatars from "../components/Avathar_Group";
 import Order_bg from "../components/order-bg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { fetchuser } from "../redux/slice/api_Slice";
+import { useDispatch} from "react-redux";
 
 const DashboardItem = () => {
   const userdata = useSelector((state) => state.userdetails);
-  console.log(userdata);
-  const fullname = userdata?.datas?.firstname + " " + userdata?.datas?.lastname;
+  console.log(userdata,"ud");
+  const fullname = userdata?.datas[0]?.firstname + " " + userdata?.datas[0]?.lastname;
+  const [dashboardData, setDashboardData] = useState([]);
+
+  // const dispatch = useDispatch()
+  // const userdatass = useSelector((state)=> state?.api?.userdata)
+  // const errordatas = useSelector((state)=>  state?.api?.error)
+
+  // useEffect(()=>{
+  //   console.log(userdatass,"ppp")
+  // },[])
+
+  
+  useEffect(() => {
+    axios
+      .get("https://demo.emeetify.com:81/pet/utils/dashboard")
+      .then((dataSet) => {
+        setDashboardData(dataSet);
+      });
+  },[]);
+
+  // console.log("datasss", userdatass)
+  // console.log("errorss", errordatas)
+  console.log("dashboarddata", dashboardData?.data?.data[0]);
   return (
     <div>
       <div className="datesec">
@@ -41,12 +67,19 @@ const DashboardItem = () => {
           </div>
           <div className="post-cards">
             <div className="newfeed">
-              <Card className="card-new" sx={{backgroundColor:"#f4fdf6", boxShadow:'1px 1px 0px 0px rgba(0,0,0,0.01)',borderRadius:'20px'}}>
+              <Card
+                className="card-new"
+                sx={{
+                  backgroundColor: "#f4fdf6",
+                  boxShadow: "1px 1px 0px 0px rgba(0,0,0,0.01)",
+                  borderRadius: "20px",
+                }}
+              >
                 <h2>New Posts</h2>
-                <h2>8</h2>
+                <h2>{dashboardData?.data?.data[0]?.adCount}</h2>
                 <div className="collection-newpost">
                   <div className="collection-icon-newpost">
-                    <Avatars />
+                    <Avatars avadata={dashboardData?.data?.data[0]?.petAddedBy}/>
                   </div>
                   <div className="collection-button">
                     <button>View All</button>
@@ -112,31 +145,38 @@ const DashboardItem = () => {
           <div className="order-details-card">
             <div className="order-details-cards">
               <div>
-                <Order_bg card_title={"Total Orders"} count={"10"}/>
+                <Order_bg card_title={"Total Orders"} count={"10"} />
               </div>
               <div>
-                <Order_bg card_title={"Approved"} count={"10"}/>
+                <Order_bg card_title={"Approved"} count={"10"} />
               </div>
               <div>
-                <Order_bg card_title={"Rejected"} count={"10"}/>
+                <Order_bg card_title={"Rejected"} count={"10"} />
               </div>
               <div>
-                <Order_bg card_title={"Pending"} count={"10"}/>
+                <Order_bg card_title={"Pending"} count={"10"} />
               </div>
               <div>
-                <Order_bg card_title={"Inprocess"} count={"10"}/>
+                <Order_bg card_title={"Inprocess"} count={"10"} />
               </div>
               <div>
-                <Order_bg card_title={"Delivered"} count={"10"}/>
+                <Order_bg card_title={"Delivered"} count={"10"} />
               </div>
             </div>
             <div className="orderfeed">
-              <Card className="card-new1" sx={{backgroundColor:"#f4fdf6", boxShadow:'1px 1px 0px 0px rgba(0,0,0,0.01)',borderRadius:'20px'}}>
+              <Card
+                className="card-new1"
+                sx={{
+                  backgroundColor: "#f4fdf6",
+                  boxShadow: "1px 1px 0px 0px rgba(0,0,0,0.01)",
+                  borderRadius: "20px",
+                }}
+              >
                 <h2>New Orders</h2>
                 <h2>8</h2>
                 <div className="collection-newpost">
                   <div className="collection-icon-newpost">
-                    <Avatars />
+                    <Avatars avadata={dashboardData?.data?.data[0]?.petAddedBy}/>
                   </div>
                   <div className="collection-button">
                     <button>View All</button>
