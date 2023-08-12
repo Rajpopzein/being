@@ -10,7 +10,7 @@ const Order_bg = ({card_title, count}) => {
             </div>
             <div className='order_details'>
                 <h3>{card_title}</h3>
-                <h4>{count}</h4>
+                <h3>{count}</h3>
             </div>
         </div>
     )

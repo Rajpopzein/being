@@ -55,11 +55,12 @@
 
 .grid-containe{
     display: grid;
-    grid-template-columns: 22rem 15rem;
+    grid-template-columns: 22rem 75%;
 }
 .post-status-card{
    width: 20rem;
    height: 20rem;
+   margin-top: -10px;
 }
 .grid-item{
     height: 10rem;
@@ -67,12 +68,13 @@
 .grid-item > img{
     width: 28rem;
     height: 15rem;
+    margin-top: -20px;
 }
 .newfeed{
     width: 50%;
 }
 .card-new{
-    margin-top: 10%;
+    margin-top: 2%;
     margin-left: 10%;
     width: 27rem;
     height: 19rem; 
@@ -153,7 +155,7 @@
 /* order card style */
 .oreder_card{
     position: relative;
-    width: 90%;
+    width: 100%;
 }
 .order_details{
     position: absolute;
@@ -170,11 +172,36 @@
 
 .card-new1{
     margin-top: 10%;
+    /* margin-right: -20px; */
+    margin-left: 20px;
     width: 24rem;
     height: 19rem; 
     border-radius: 10px; 
     padding: 3rem 3rem;
 }
+
+/* .post-status-card-image1{
+    height: 20%;
+} */
+
+
+/* oreder card */
+.main-card{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.card-detail-order{
+    position: absolute;
+    top:20%;
+    left: 15%;
+}
+.card-image-order> img {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+}
+
 
 
 @media only screen and (max-width:1096px){

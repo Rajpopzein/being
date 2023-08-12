@@ -26,7 +26,7 @@ const apiSlice = createSlice({
         .addCase(fetchuser.fulfilled, (state, action)=>{
             state.loading = 'idle';
             state.userdata = action.payload.data[0];
-            console.log(state.userdata,"ppp")
+            // console.log(state.userdata,"ppp")
         })
         .addCase(fetchuser.rejected, (state, action) => {
             state.loading = 'idle';

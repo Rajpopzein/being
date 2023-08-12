@@ -42,7 +42,7 @@ const DashboardItem = () => {
 
   // console.log("datasss", userdatass)
   // console.log("errorss", errordatas)
-  console.log("dashboarddata", dashboardData?.data?.data[0]);
+  // console.log("dashboarddata", dashboardData?.data?.data[0]);
   console.log(userdatass,"pppo")
   return (
     <div>
@@ -78,11 +78,11 @@ const DashboardItem = () => {
                   borderRadius: "20px",
                 }}
               >
-                <h2>New Posts</h2>
-                <h2>{dashboardData?.data?.data[0]?.adCount}</h2>
+                <h3>New Posts</h3>
+                <h3>{dashboardData?.data?.data[0]?.adCount}</h3>
                 <div className="collection-newpost">
                   <div className="collection-icon-newpost">
-                    <Avatars avadata={dashboardData?.data?.data[0]?.petAddedBy}/>
+                    <Avatars avadata={userdatass?.userdata?.petAddedBy}/>
                   </div>
                   <div className="collection-button">
                     <button>View All</button>
@@ -100,7 +100,7 @@ const DashboardItem = () => {
                   />
                   <div className="post-status-card-details-odd">
                     <h3>Total Posts</h3>
-                    <h3>8</h3>
+                    <h3>{userdatass?.userdata?.petCount}</h3>
                   </div>
                 </div>
                 <div className="grid-item">
@@ -111,7 +111,7 @@ const DashboardItem = () => {
                   />
                   <div className="post-status-card-details">
                     <h3>Approved</h3>
-                    <h3>9</h3>
+                    <h3>{userdatass?.userdata?.petApprovedCount}</h3>
                   </div>
                 </div>
                 <div className="grid-item">
@@ -122,7 +122,7 @@ const DashboardItem = () => {
                   />
                   <div className="post-status-card-details-odd">
                     <h3>Rejected</h3>
-                    <h3>6</h3>
+                    <h3>{userdatass?.userdata?.petRejectedCount}</h3>
                   </div>
                 </div>
                 <div className="grid-item">
@@ -148,22 +148,22 @@ const DashboardItem = () => {
           <div className="order-details-card">
             <div className="order-details-cards">
               <div>
-                <Order_bg card_title={"Total Orders"} count={"10"} />
+                <Order_bg card_title={"Total Orders"} count={userdatass?.userdata?.orderCount} />
               </div>
               <div>
-                <Order_bg card_title={"Approved"} count={"10"} />
+                <Order_bg card_title={"Approved"} count={userdatass?.userdata?.orderApproveCount} />
               </div>
               <div>
-                <Order_bg card_title={"Rejected"} count={"10"} />
+                <Order_bg card_title={"Rejected"} count={userdatass?.userdata?.orderRejectedCount} />
               </div>
               <div>
-                <Order_bg card_title={"Pending"} count={"10"} />
+                <Order_bg card_title={"Pending"} count={userdatass?.userdata?.orderPendingCount} />
               </div>
               <div>
-                <Order_bg card_title={"Inprocess"} count={"10"} />
+                <Order_bg card_title={"Inprocess"} count={userdatass?.userdata?.orderProgressCount} />
               </div>
               <div>
-                <Order_bg card_title={"Delivered"} count={"10"} />
+                <Order_bg card_title={"Delivered"} count={userdatass?.userdata?.orderDeliverCount} />
               </div>
             </div>
             <div className="orderfeed">
@@ -175,11 +175,11 @@ const DashboardItem = () => {
                   borderRadius: "20px",
                 }}
               >
-                <h2>New Orders</h2>
-                <h2>8</h2>
+                <h3>New Orders</h3>
+                <h3>8</h3>
                 <div className="collection-newpost">
                   <div className="collection-icon-newpost">
-                    <Avatars avadata={dashboardData?.data?.data[0]?.petAddedBy}/>
+                    <Avatars avadata={userdatass?.userdata?.orderAddedBy}/>
                   </div>
                   <div className="collection-button">
                     <button>View All</button>

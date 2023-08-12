@@ -1,0 +1,11 @@
+.orederPages{
+    padding: 2rem;
+}
+.headers{
+    margin-top: 1rem;
+    font-weight: 400;
+}
+.order-details-cards{
+    display: flex;
+    /* flex-direction: column; */
+}
