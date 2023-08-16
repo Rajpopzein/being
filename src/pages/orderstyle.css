@@ -7,5 +7,26 @@
 }
 .order-details-cardss{
     display: flex;
-    /* flex-direction: column; */
+}
+
+
+.main-card{
+    position: relative;
+    left: -3rem;
+    top: -3rem;
+}
+
+.image-card-order{
+    position: absolute;
+}
+
+.details-card-order{
+    position: absolute;
+    top:4rem;
+    left:4rem;
+   
+}
+.details-card-order > p{
+    color:#fff;
+    font-size: 22px;
 }
