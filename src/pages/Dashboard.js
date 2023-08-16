@@ -24,8 +24,12 @@ import DashboardItem from "./DashboardItem";
 import { useDispatch } from "react-redux";
 import { selecterchange } from "../redux/slice/pageselectionSlice";
 import OrdersPage from "./OrdersPage";
-
-
+import ads from "../resource/Web - Menu/Ads.png";
+import post from "../resource/Web - Menu/posts.png";
+import order from "../resource/Web - Menu/Orders.png"
+import dashboard from "../resource/Web - Menu/Dashboard.png"
+import AdsPage from "./AdsPage";
+import PostPage from "./PostPage";
 const pageSelectionHandler = (dispatch, value) => {
   dispatch(selecterchange(value));
 };
@@ -87,7 +91,6 @@ export default function PersistentDrawerLeft() {
     }
   }, []);
 
-
   const navigate = useNavigate();
 
   const data = useSelector((state) => state.userdetails);
@@ -134,7 +137,7 @@ export default function PersistentDrawerLeft() {
                 marginRight: "0.7rem",
               }}
             />
-            <span style={{ marginTop: "1rem" }}>pet storeeee</span>
+            <span style={{ marginTop: "1rem" }}>pet store</span>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -161,7 +164,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </DrawerHeader>
         <List style={{ marginTop: "3rem" }}>
-          <ListItem disablePadding sx={{margin:"25px 0px"}}>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
             <ListItemButton
               sx={
                 pages === 0
@@ -170,39 +173,93 @@ export default function PersistentDrawerLeft() {
                         "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
                       borderTopRightRadius: "25px",
                       borderBottomRightRadius: "25px",
-                      marginRight:'20px',
-                      color:'#fff'
+                      marginRight: "20px",
+                      color: "#fff",
                     }
                   : {}
               }
               onClick={() => pageSelectionHandler(dispatch, 0)}
             >
               <ListItemIcon>
-                <InboxIcon />
+              <img src={dashboard}  style={{height:"20px",width:"20px"}} className="sideImage" alt="DashboardImg" />
               </ListItemIcon>
-              <ListItemText primary={"Dashboard"} sx={{marginLeft:'-10%'}}/>
+              <ListItemText primary={"Dashboard"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton  sx={
+            <ListItemButton
+              sx={
                 pages === 1
                   ? {
                       backgroundImage:
                         "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
                       borderTopRightRadius: "25px",
                       borderBottomRightRadius: "25px",
-                      marginRight:'20px',
-                      color:'#fff'
+                      marginRight: "20px",
+                      color: "#fff",
                     }
-                  : {
-                    
-                  }
+                  : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 1)}>
+              onClick={() => pageSelectionHandler(dispatch, 1)}
+            >
               <ListItemIcon>
-                <InboxIcon />
+              <img src={order}  style={{height:"20px",width:"20px"}} className="sideImage" alt="OrderImg" />
               </ListItemIcon>
-              <ListItemText primary={"Orders"}  sx={{marginLeft:'-10%'}}/>
+              <ListItemText primary={"Orders"} sx={{ marginLeft: "-10%" }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={
+                pages === 2
+                  ? {
+                      backgroundImage:
+                        "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
+                      borderTopRightRadius: "25px",
+                      borderBottomRightRadius: "25px",
+                      marginRight: "20px",
+                      color: "#fff",
+                    }
+                  : {}
+              }
+              onClick={() => pageSelectionHandler(dispatch, 2)}
+            >
+              <ListItemIcon>
+                <img
+                  src={post}
+                  style={{ height: "20px", width: "20px"}}
+                  className="sideImage"
+                  alt="PostImg"
+                />
+              </ListItemIcon>
+              <ListItemText primary={"Post"} sx={{ marginLeft: "-10%" }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={
+                pages === 3
+                  ? {
+                      backgroundImage:
+                        "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
+                      borderTopRightRadius: "25px",
+                      borderBottomRightRadius: "25px",
+                      marginRight: "20px",
+                      color: "#fff",
+                    }
+                  : {}
+              }
+              onClick={() => pageSelectionHandler(dispatch, 3)}
+            >
+              <ListItemIcon>
+                <img
+                  src={ads}
+                  style={{ height: "20px", width: "20px" }}
+                  className="sideImage"
+                  alt="AdsImg"
+                />
+              </ListItemIcon>
+              <ListItemText primary={"Ads"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
         </List>
@@ -210,7 +267,9 @@ export default function PersistentDrawerLeft() {
       <Main open={open} sx={{ paddingTop: "3rem" }}>
         <DrawerHeader />
         {pages === 0 && <DashboardItem />}
-        {pages === 1 && <OrdersPage/>}
+        {pages === 1 && <OrdersPage />}
+        {pages === 2 && <PostPage />}
+        {pages === 3 && <AdsPage />}
       </Main>
     </Box>
   );
