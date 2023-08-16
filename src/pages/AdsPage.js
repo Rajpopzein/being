@@ -4,6 +4,8 @@ import {
   Card,
   Grid,
   IconButton,
+  Menu,
+  MenuItem,
   Paper,
   Select,
   Stack,
@@ -25,11 +27,27 @@ const AdsPage = () => {
     color: theme.palette.text.secondary,
   }));
 
-  const [title, setTitle] = useState("");
-  console.log(title);
-  const handleSubmit = () => {
-    console.log("submitted");
+  const [formData, setFormData] = useState({
+    title: "",
+    adId: "",
+    position: "",
+    pages: "",
+    timer: "",
+    description: "",
+    link: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -50,47 +68,80 @@ const AdsPage = () => {
         </Typography>
       </Grid>
       <Card style={{ marginTop: "10px", height: "500px" }}>
-        <Stack direction="row">
-          <Stack style={{ marginLeft: "30px" }}>
-            <Typography className="typography">Add Title</Typography>
-            <TextField
-              size="small"
-              className="textfield"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-            <Typography className="typography">Ad id</Typography>
-            <TextField size="small" className="textfield" />
-            <Typography className="typography">Position</Typography>
-            <Select size="small" className="textfield" />
-            <Typography className="typography">Pages</Typography>
-            <Select size="small" className="textfield" />
-          </Stack>
+        <form onSubmit={handleSubmit}>
+          <Stack direction="row">
+            <Stack style={{ marginLeft: "30px" }}>
+              <Typography className="typography">Add Title</Typography>
+              <TextField
+                size="small"
+                className="textfield"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+              <Typography className="typography">Ad id</Typography>
+              <TextField
+                size="small"
+                className="textfield"
+                name="adId"
+                value={formData.adId}
+                onChange={handleInputChange}
+              />
+              <Typography className="typography">Position</Typography>
+              <Select
+                value={formData.position}
+                name="position"
+                size="small"
+                className="textfield"
+                onChange={handleInputChange}
+              >
+                <MenuItem value={"bottom"}>Bottom</MenuItem>
+                <MenuItem value={"left"}>Left</MenuItem>
+                <MenuItem value={"right"}>Right</MenuItem>
+                <MenuItem value={"top"}>Top</MenuItem>
+              </Select>
+              <Typography className="typography">Pages</Typography>
+              <Select
+                value={formData.pages}
+                name="pages"
+                size="small"
+                className="textfield"
+                onChange={handleInputChange}
+              >
+                <MenuItem value={"login"}>Login</MenuItem>
+                <MenuItem value={"settings"}>Settings</MenuItem>
+                <MenuItem value={"registration"}>Registration</MenuItem>
+              </Select>
+            </Stack>
 
-          <Stack style={{ marginLeft: "30%" }}>
-            <Typography className="typography">Timer</Typography>
-            <TextField size="small" className="textfield" />
-            <Typography className="typography">Description</Typography>
-            <TextareaAutosize minRows={5} size="small" className="textfield" />
-            <Typography className="typography">Link</Typography>
-            <TextField size="small" className="textfield" />
+            <Stack style={{ marginLeft: "30%" }}>
+              <Typography className="typography">Timer</Typography>
+              <TextField size="small" className="textfield" />
+              <Typography className="typography" name="description" value={formData.description} onChange={handleInputChange}>Description</Typography>
+              <TextareaAutosize
+                minRows={5}
+                size="small"
+                className="textfield"
+              />
+              <Typography className="typography" >Link</Typography>
+              <TextField size="small" className="textfield" />
+            </Stack>
           </Stack>
-        </Stack>
-        <Stack
-          direction="row"
-          style={{ marginTop: "50px", marginLeft: "30px" }}
-        >
-          <Button
-            onClick={() => console.log("canceled")}
-            className="cancelButton"
+          <Stack
+            direction="row"
+            style={{ marginTop: "50px", marginLeft: "30px" }}
           >
-            cancel
-          </Button>
-          <Button onClick={() => handleSubmit()} className="submitButton">
-            Add a new ad
-          </Button>
-        </Stack>
+            <Button
+              onClick={() => console.log("canceled")}
+              className="cancelButton"
+            >
+              cancel
+            </Button>
+            <Button type="submit" className="submitButton">
+              Add a new ad
+            </Button>
+          </Stack>
+        </form>
       </Card>
     </>
   );

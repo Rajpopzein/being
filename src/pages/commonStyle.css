@@ -16,7 +16,7 @@
 }
 .submitButton{
     width: 300px;
-    background: purple !important;
+    background: linear-gradient(to right ,rgb(201, 3, 201) , rgb(208, 69, 208) );
     border-radius: 20px !important;
     color: #fff !important; 
     margin-left: 20px !important;

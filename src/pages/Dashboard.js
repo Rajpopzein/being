@@ -30,6 +30,12 @@ import order from "../resource/Web - Menu/Orders.png"
 import dashboard from "../resource/Web - Menu/Dashboard.png"
 import AdsPage from "./AdsPage";
 import PostPage from "./PostPage";
+import PetFoodAccessories from "./PetFoodAccessories";
+import petFood from '../resource/Web - Menu/Food&accessories.png';
+import users from '../resource/Web - Menu/Users.png';
+import feedback from '../resource/Web - Menu/Feedbacks.png'
+import Users from "./Users";
+import Feedback from "./Feedback";
 const pageSelectionHandler = (dispatch, value) => {
   dispatch(selecterchange(value));
 };
@@ -186,7 +192,7 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary={"Dashboard"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
             <ListItemButton
               sx={
                 pages === 1
@@ -208,7 +214,7 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary={"Orders"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
             <ListItemButton
               sx={
                 pages === 2
@@ -235,7 +241,7 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary={"Post"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
             <ListItemButton
               sx={
                 pages === 3
@@ -262,6 +268,87 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary={"Ads"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
+            <ListItemButton
+              sx={
+                pages === 4
+                  ? {
+                      backgroundImage:
+                        "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
+                      borderTopRightRadius: "25px",
+                      borderBottomRightRadius: "25px",
+                      marginRight: "20px",
+                      color: "#fff",
+                    }
+                  : {}
+              }
+              onClick={() => pageSelectionHandler(dispatch, 4)}
+            >
+              <ListItemIcon>
+                <img
+                  src={petFood}
+                  style={{ height: "20px", width: "20px" }}
+                  className="sideImage"
+                  alt="petFoodImg"
+                />
+              </ListItemIcon>
+              <ListItemText primary={"Pet Food & Accessories"} sx={{ marginLeft: "-10%" }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
+            <ListItemButton
+              sx={
+                pages === 5
+                  ? {
+                      backgroundImage:
+                        "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
+                      borderTopRightRadius: "25px",
+                      borderBottomRightRadius: "25px",
+                      marginRight: "20px",
+                      color: "#fff",
+                    }
+                  : {}
+              }
+              onClick={() => pageSelectionHandler(dispatch, 5)}
+            >
+              <ListItemIcon>
+                <img
+                  src={users}
+                  style={{ height: "20px", width: "20px" }}
+                  className="sideImage"
+                  alt="userImg"
+                />
+              </ListItemIcon>
+              <ListItemText primary={"Users"} sx={{ marginLeft: "-10%" }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
+            <ListItemButton
+              sx={
+                pages === 6
+                  ? {
+                      backgroundImage:
+                        "linear-gradient(to right top, #982bd5, #a840db, #b853e2, #c765e9, #d577f0)",
+                      borderTopRightRadius: "25px",
+                      borderBottomRightRadius: "25px",
+                      marginRight: "20px",
+                      color: "#fff",
+                    }
+                  : {}
+              }
+              onClick={() => pageSelectionHandler(dispatch, 6)}
+            >
+              <ListItemIcon>
+                <img
+                  src={feedback}
+                  style={{ height: "20px", width: "20px" }}
+                  className="sideImage"
+                  alt="feedbackImg"
+                />
+              </ListItemIcon>
+              <ListItemText primary={"Feedbacks"} sx={{ marginLeft: "-10%" }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
       <Main open={open} sx={{ paddingTop: "3rem" }}>
@@ -270,6 +357,9 @@ export default function PersistentDrawerLeft() {
         {pages === 1 && <OrdersPage />}
         {pages === 2 && <PostPage />}
         {pages === 3 && <AdsPage />}
+        {pages === 4 && <PetFoodAccessories />}
+        {pages === 5 && <Users />}
+        {pages === 6 && <Feedback />}
       </Main>
     </Box>
   );
