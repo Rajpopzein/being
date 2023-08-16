@@ -5,20 +5,26 @@ import storage from "redux-persist/lib/storage";
 import api_Slice from "../slice/api_Slice";
 import pageSelector from "../slice/pageselectionSlice";
 
+
 const persistconfig = {
     key: 'root',
+    storage,
+}
+const pageconfig = {
+    key: 'page',
     storage,
 }
 
 
 const persistreducer = persistReducer(persistconfig, reduser)
+const pageselection = persistReducer(pageconfig,pageSelector)
 
 
 const store = configureStore({
     reducer:{
         userdetails: persistreducer,
         dashapi : api_Slice,
-        pageSelector : pageSelector
+        pageSelector : pageselection
     }
 })
 

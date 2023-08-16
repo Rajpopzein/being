@@ -5,6 +5,7 @@ import card1 from '../resource/Web - Menu/posts_1.png'
 import card2 from '../resource/Web - Menu/posts_2.png'
 import card3 from '../resource/Web - Menu/posts_3.png'
 import card4 from '../resource/Web - Menu/posts_4.png'
+import Item_Categories from "../components/item_Categories"
 
 const OrdersPage = () => {
     return(
@@ -24,7 +25,9 @@ const OrdersPage = () => {
                 <OrderCard title={"Delivered"} values={19} image={card2}/>
             </div>
             <div className="pets-and-orders">
-
+                <div>
+                    <Item_Categories/>
+                </div>
             </div>
         </div>
     )

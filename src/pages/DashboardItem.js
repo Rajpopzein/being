@@ -13,36 +13,35 @@ import Order_bg from "../components/order-bg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { fetchuser } from "../redux/slice/api_Slice";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 const DashboardItem = () => {
   const userdata = useSelector((state) => state.userdetails);
-  console.log(userdata,"ud");
-  const fullname = userdata?.datas[0]?.firstname + " " + userdata?.datas[0]?.lastname;
+  console.log(userdata, "ud");
+  const fullname =
+    userdata?.datas[0]?.firstname + " " + userdata?.datas[0]?.lastname;
   const [dashboardData, setDashboardData] = useState([]);
 
-  const dispatch = useDispatch()
-  const userdatass = useSelector((state)=> state?.dashapi)
-  const errordatas = useSelector((state)=>  state?.api?.error)
+  const dispatch = useDispatch();
+  const userdatass = useSelector((state) => state?.dashapi);
+  const errordatas = useSelector((state) => state?.api?.error);
 
+  useEffect(() => {
+    dispatch(fetchuser());
+  }, []);
 
-  useEffect(()=>{
-    dispatch(fetchuser())
-  },[])
-
-  
   useEffect(() => {
     axios
       .get("https://demo.emeetify.com:81/pet/utils/dashboard")
       .then((dataSet) => {
         setDashboardData(dataSet);
       });
-  },[]);
+  }, []);
 
   // console.log("datasss", userdatass)
   // console.log("errorss", errordatas)
   // console.log("dashboarddata", dashboardData?.data?.data[0]);
-  console.log(userdatass,"pppo")
+  console.log(userdatass, "pppo");
   return (
     <div>
       <div className="datesec">
@@ -81,7 +80,7 @@ const DashboardItem = () => {
                 <h3>{dashboardData?.data?.data[0]?.adCount}</h3>
                 <div className="collection-newpost">
                   <div className="collection-icon-newpost">
-                    <Avatars avadata={userdatass?.userdata?.petAddedBy}/>
+                    <Avatars avadata={userdatass?.userdata?.petAddedBy} />
                   </div>
                   <div className="collection-button">
                     <button>View All</button>
@@ -147,22 +146,40 @@ const DashboardItem = () => {
           <div className="order-details-card">
             <div className="order-details-cards">
               <div>
-                <Order_bg card_title={"Total Orders"} count={userdatass?.userdata?.orderCount} />
+                <Order_bg
+                  card_title={"Total Orders"}
+                  count={userdatass?.userdata?.orderCount}
+                />
               </div>
               <div>
-                <Order_bg card_title={"Approved"} count={userdatass?.userdata?.orderApproveCount} />
+                <Order_bg
+                  card_title={"Approved"}
+                  count={userdatass?.userdata?.orderApproveCount}
+                />
               </div>
               <div>
-                <Order_bg card_title={"Rejected"} count={userdatass?.userdata?.orderRejectedCount} />
+                <Order_bg
+                  card_title={"Rejected"}
+                  count={userdatass?.userdata?.orderRejectedCount}
+                />
               </div>
               <div>
-                <Order_bg card_title={"Pending"} count={userdatass?.userdata?.orderPendingCount} />
+                <Order_bg
+                  card_title={"Pending"}
+                  count={userdatass?.userdata?.orderPendingCount}
+                />
               </div>
               <div>
-                <Order_bg card_title={"Inprocess"} count={userdatass?.userdata?.orderProgressCount} />
+                <Order_bg
+                  card_title={"Inprocess"}
+                  count={userdatass?.userdata?.orderProgressCount}
+                />
               </div>
               <div>
-                <Order_bg card_title={"Delivered"} count={userdatass?.userdata?.orderDeliverCount} />
+                <Order_bg
+                  card_title={"Delivered"}
+                  count={userdatass?.userdata?.orderDeliverCount}
+                />
               </div>
             </div>
             <div className="orderfeed">
@@ -178,7 +195,7 @@ const DashboardItem = () => {
                 <h3>8</h3>
                 <div className="collection-newpost">
                   <div className="collection-icon-newpost">
-                    <Avatars avadata={userdatass?.userdata?.orderAddedBy}/>
+                    <Avatars avadata={userdatass?.userdata?.orderAddedBy} />
                   </div>
                   <div className="collection-button">
                     <button>View All</button>
