@@ -11,7 +11,7 @@ const OrdersPage = () => {
             <div className="headers">
                 <h3>Orders</h3>
             </div>
-            <div className="order-details-cards">
+            <div className="order-details-cardss">
                 <OrderCard title={"Total Orders"} values={19}/>
                 <OrderCard title={"Total Orders"} values={19}/>
             </div>
