@@ -101,7 +101,7 @@ export default function PersistentDrawerLeft() {
 
   const data = useSelector((state) => state.userdetails);
 
-  console.log("data", data);
+  // console.log("data", data);
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
