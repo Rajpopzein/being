@@ -204,6 +204,13 @@
 
 
 
+/* //Dropdownlist */
+
+/* .customized-button :hover {
+    background-color: #ffff !important;
+} */
+
+
 @media only screen and (max-width:1096px){
     .post-cards{
         flex-direction: column;

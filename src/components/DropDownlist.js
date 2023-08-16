@@ -9,6 +9,8 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import '../components/style.css'
+import { useState } from 'react';
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -53,45 +55,53 @@ const StyledMenu = styled((props) => (
 
 export default function Dropdownlist() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [selectedData, setSelectedData] = useState("Coimbatore, India")
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (data) => {
     setAnchorEl(null);
+    setSelectedData(data.target.innerText)
   };
 
   return (
     <div>
       <Button
-        id="demo-customized-button"
-        aria-controls={open ? 'demo-customized-menu' : undefined}
+        id="customized-button"
+        className='customized-button'
+        aria-controls={open ? 'customized-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         variant="contained"
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
+        sx={{"&:hover": {backgroundColor: "transparent"},backgroundColor:'#ffff', color:'#737373'}}
       >
-        Options
+        {selectedData}
       </Button>
       <StyledMenu
         id="demo-customized-menu"
         MenuListProps={{
-          'aria-labelledby': 'demo-customized-button',
+          'aria-labelledby': 'customized-button',
         }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        onClick={(e)=>{console.log("hhh",e.target)}}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          Edit
+        <MenuItem onClick={handleClose} data = "Gudalur, India" disableRipple>
+          Gudalur, India
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          Duplicate
+        <MenuItem onClick={handleClose} data = "Chennai, India" disableRipple>
+          Chennai, India
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          Archive
+        <MenuItem onClick={handleClose} data = "Bangaluru, India"disableRipple>
+          Bengaluru, India
+        </MenuItem>
+        <MenuItem onClick={handleClose} data = "Coimbatore, India"disableRipple>
+          Coimbatore, India
         </MenuItem>
       </StyledMenu>
     </div>

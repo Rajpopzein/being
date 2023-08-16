@@ -48,14 +48,14 @@ export default function Item_Categories() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{width:'100%'}}>
-        <Tabs value={value} onChange={handleChange} aria-label="Categories tab" sx={{"&button":{color:"#9f39d8"}}} >
-          <Tab label="Pets" {...a11yProps(0)} />
-          <Tab label="Foods & Accessories" {...a11yProps(1)} />
-          <div style={{float:'right'}}>
-            <Dropdownlist/>
-          </div>
+      <Box sx={{width:'100%', display:'flex', justifyContent:'space-between'}}>
+        <Tabs value={value} onChange={handleChange} aria-label="Categories tab">
+            <Tab label="Pets" {...a11yProps(0)} />
+            <Tab label="Foods & Accessories" {...a11yProps(1)} />
         </Tabs>
+        <div style={{float:'right'}}>
+            <Dropdownlist/>
+        </div>
       </Box>
       <CustomTabPanel value={value} index={0}>
         Item One
