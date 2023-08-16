@@ -9,7 +9,7 @@ import card2 from "../resource/Web - Menu/posts_2.png";
 import card3 from "../resource/Web - Menu/posts_3.png";
 import card4 from "../resource/Web - Menu/posts_4.png";
 import Avatars from "../components/Avathar_Group";
-import Order_bg from "../components/order-bg";
+import Order_bg from "../components/Order-bg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { fetchuser } from "../redux/slice/api_Slice";
