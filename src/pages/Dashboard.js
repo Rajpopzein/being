@@ -134,7 +134,7 @@ export default function PersistentDrawerLeft() {
                 marginRight: "0.7rem",
               }}
             />
-            <span style={{ marginTop: "1rem" }}>pet store</span>
+            <span style={{ marginTop: "1rem" }}>pet storeeee</span>
           </Typography>
         </Toolbar>
       </AppBar>
