@@ -1,12 +1,38 @@
-import { createSlice, AsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
 
-export const petlistapi = AsyncThunk("api/petlisr", async(vale)=>{
-    const listdata = await axios.get("https://demo.emeetify.com:81/pet/order/orderfilter?type=pet&firstname=")
+export const petlistapi = createAsyncThunk("getapi/petlisr", async()=>{
+    const listdata = await axios.get("https://demo.emeetify.com:81/pet/order/orderfilter?type='pet'&firstname=")
     return listdata
 })
 
 
+const pet_slice = createSlice({
+    name:'petapi',
+    initialState:{
+        petdata: null,
+        loading: 'idle',
+        error: null,
+    },
+    reducers:{
 
+    },
+    extraReducers:(builder) => {
+        builder.addCase(petlistapi.pending, (state)=>{
+            state.loading = "pending"
+        }).addCase(petlistapi.fulfilled,(state, action)=>{
+            state.loading = 'idle';
+            state.petdata = action.payload
+            // console.log("action",action)
+        }).addCase(petlistapi.rejected,(state, action)=>{
+            state.loading='error';
+            state.error = action.error.message
+        })
+    }
+})
+
+
+
+export const petreducer = pet_slice.reducer

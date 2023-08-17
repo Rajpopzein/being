@@ -8,7 +8,13 @@ import Dropdownlist from "./DropDownlist";
 import { Input } from "@mui/material";
 import "../components/style.css";
 import SearchIcon from "@mui/icons-material/Search";
+import { useEffect } from "react";
 import DataTable from "./Table";
+import { useDispatch,useSelector } from "react-redux"; 
+import { petlistapi } from "../redux/slice/petsApislice";
+import { BoxLoading } from 'react-loadingg';
+import Loaders from "./loader";
+import { Height } from "@mui/icons-material";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,10 +51,34 @@ function a11yProps(index) {
 
 export default function Item_Categories() {
   const [value, setValue] = React.useState(0);
+ 
+  const dispatch = useDispatch()
+  // const pending = useSelector((state)=>{state.petsList.pending})
+  // const fulfilled = useSelector((state)=>{state.petsList.fulfilled})
+  // const error = useSelector((state)=>{state.petsList.rejected})
+
+  const tabledata = useSelector((state)=> state.petsList)
+
+  
+
+  useEffect(()=>{
+    if(value === 0){
+        dispatch(petlistapi())
+    }
+    else{
+      console.log("working")
+    }
+    
+  },[value])
+
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const handleChangedata = ()=>{
+    console.log("chj")
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -91,8 +121,8 @@ export default function Item_Categories() {
           <button placeholder="Place order">Place Order</button>
         </div>
       </div>
-      <CustomTabPanel value={value} index={0}>
-        <DataTable/>
+      <CustomTabPanel value={value} onChange={handleChangedata} index={0}>
+          <DataTable data={tabledata}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Item Two
