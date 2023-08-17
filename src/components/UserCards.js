@@ -1,32 +1,32 @@
+
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { Avatar } from '@mui/material';
 
 export default function UserCards({name,location,images}) {
-  const theme = useTheme();
-
   return (
-    <Card sx={{ display: 'flex' ,height:'10rem', borderRadius:'15px'}}>
-      <Avatar alt={name} src={`https://demo.emeetify.com:5016/${images}`} sx={{ width: 140, height: 140 , margin:'2%'}} />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
+    <Card sx={{ maxWidth: 345, borderRadius:'10px' }}>
+      <CardMedia
+        component="img"
+        alt={name}
+        height="180"
+        image={`https://demo.emeetify.com:5016/${images}`}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
             {name}
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Mac Miller
-          </Typography>
-        </CardContent>
-      </Box>
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {location}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">View</Button>
+      </CardActions>
     </Card>
   );
 }

@@ -38,10 +38,6 @@ const DashboardItem = () => {
       });
   }, []);
 
-  // console.log("datasss", userdatass)
-  // console.log("errorss", errordatas)
-  // console.log("dashboarddata", dashboardData?.data?.data[0]);
-  console.log(userdatass, "pppo");
   return (
     <div>
       <div className="datesec">
