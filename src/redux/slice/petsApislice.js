@@ -3,8 +3,8 @@ import axios from "axios";
 
 
 
-export const petlistapi = createAsyncThunk("getapi/petlisr", async()=>{
-    const listdata = await axios.get("https://demo.emeetify.com:81/pet/order/orderfilter?type='pet'&firstname=")
+export const petlistapi = createAsyncThunk("getapi/petlisr", async(value)=>{
+    const listdata = await axios.get(`https://demo.emeetify.com:81/pet/order/orderfilter?type=${value}&firstname=`)
     return listdata
 })
 

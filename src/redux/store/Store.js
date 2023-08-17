@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import api_Slice from "../slice/api_Slice";
 import pageSelector from "../slice/pageselectionSlice";
 import { petreducer } from "../slice/petsApislice";
+import AlluserSlice from "../slice/AlluserSlice";
 
 
 const persistconfig = {
@@ -26,7 +27,8 @@ const store = configureStore({
         userdetails: persistreducer,
         dashapi : api_Slice,
         pageSelector : pageselection,
-        petsList : petreducer
+        petsList : petreducer,
+        Alluser : AlluserSlice
     }
 })
 

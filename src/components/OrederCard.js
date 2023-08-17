@@ -6,7 +6,6 @@ import { Card } from '@mui/material'
 const OrderCard = ({title,values,image}) => {
     
     return(
-       
             <div className='main-card'>
             <div className='image-card-order'>
                 <img src={image} alt='card' style={{width:'135%',height:'15rem'}}/>

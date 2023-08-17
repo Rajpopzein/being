@@ -7,8 +7,9 @@ import Loader from 'rsuite/Loader';
 const Loaders = ()=>{
     return(
         <div>
-        <Placeholder.Paragraph rows={8} />
-        <Loader center content="loading" />
+        {/* <Placeholder.Paragraph rows={8} />
+        <Loader center content="loading" /> */}
+        <BoxLoading/>
       </div>
     )
 

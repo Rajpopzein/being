@@ -1,105 +1,241 @@
-import * as React from 'react';
-import  {DataGrid}  from '@mui/x-data-grid';
-import '../components/style.css'
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import Loaders from './loader';
-const columns = [
-  { field: 'to_date', headerName: 'Date', width: 120, height: 80 },
-  { field: 'order_id', headerName: 'Order id', width: 130 },
-  { field: 'Category', headerName: 'Category', width: 130 },
-  {
-    field: 'breed',
-    headerName: 'Breed',
-    // type: 'number',
-    width: 120,
-  },
-  {
-    field: 'premium_amount',
-    headerName: 'Price',
-    width: 140,
-  },
-  {
-    field: 'name',
-    headerName: 'User',
-    width: 140,
-  },
-  {
-    field: 'location',
-    headerName: 'Location',
-    width: 140,
-  },
-  {
-    field: 'status',
-    headerName: 'Status',
-    width: 140,
-  },
-  {
-    field: 'Action',
-    headerName: 'Action',
-    width: 140,
-  },
-];
+import * as React from "react";
+import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import {
+  Card,
+  IconButton,
+  InputBase,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableFooter,
+  TablePagination,
+} from "@mui/material";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import Loaders from "./loader";
+import { useEffect } from "react";
 
-const rows = [
-  // { id: 1, Date: "20/10/2000", Orderid: '000001', firstName: 'Jon', age: 35 ,},
-  // { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  // { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  // { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  // { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  // { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  // { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  // { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
 
-export default function DataTable({data}) {
-  const [loadervalue, setloader] = React.useState(true)
-  console.log("]]]]]",data)
-  useEffect(()=>{
+
+let rows = ""
+
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
+  );
+}
+
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};
+
+// function createData(name, calories, fat) {
+//   return { name, calories, fat };
+// }
+
+export default function DataTable({ data, columns, index }) {
+  const [loadervalue, setloader] = React.useState(true);
+
+  useEffect(() => {
     // console.log("tabledata", tabledata.loading)
-    if(data.loading === "pending"){
+    if (data.loading === "pending") {
       setloader(true);
-    }
-    else if(data.loading === "idle"){
+    } else if (data.loading === "idle") {
       setTimeout(() => {
         setloader(false);
-      }, 87000);
-      
+      }, 3000);
     }
-},[data])
+  }, [data]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  console.log("tbldata", data?.petdata?.data?.data)
-  let id = 1
-  if(data?.petdata?.data?.data != undefined)
-  {
-    for(let datas of data?.petdata?.data?.data){
-    rows.push({...datas, id : id++})
-  }
-  }
-  
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  
-  
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  //mapping data into array
+  rows = data?.petdata?.data?.data;
+
+  console.log("row", rows)
+ 
+  // }
+
   return (
-    <div style={{ height:"auto", width: '100%' }}>
-
-{loadervalue ?
-          <Loaders/>
-        :
-      <DataGrid
-        sx={{"& .MuiDataGrid-row":{margin:'20px',width:"95%", borderRadius:'20px', backgroundColor:'#fff'},backgroundColor:'#f5f3f6',"& .css-yrdy0g-MuiDataGrid-columnHeaderRow":{margin:'20px',width:"95%", borderRadius:'20px'},"& .MuiDataGrid-columnHeaders":{backgroundColor:'#fff', border:'0px',height:"500px"},"& .css-1wyagrc-MuiDataGrid-root":{border:"0px", borderStyle:'none'}}}
-        rows={rows}
-        columns={columns}
-        className='datagrid'
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
-          },
-        }}
-        // pageSizeOptions={[5, 10]}
-        checkboxSelection
-      />}
-    </div>
+    <>
+      {loadervalue ? (
+        <Loaders />
+      ) : (
+        <Card>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell>{column.headerName}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              {index === 0 ? (
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? rows.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                    : rows
+                  ).map((row) => (
+                    <TableRow key={row.id[0]}>
+                    <TableCell>{row.to_date}</TableCell>
+                    <TableCell>{row.order_id}</TableCell>
+                    <TableCell>{row.Category}</TableCell>
+                    <TableCell>{row.breed}</TableCell>
+                    <TableCell>{row.premium_amount}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.location}</TableCell>
+                    <TableCell>{row.status}</TableCell>
+                    <TableCell>{row.Action}</TableCell>
+                  </TableRow>
+                  ))}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              ) : (
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? rows.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                    : rows
+                  ).map((row) => (
+                    <TableRow key={row.id[0]}>
+                    <TableCell>{row.updated_at}</TableCell>
+                    <TableCell>{row.order_id}</TableCell>
+                    <TableCell>{row.avail_qty
+}</TableCell>
+                    {/* <TableCell>{row.breed}</TableCell> */}
+                    <TableCell>{row.total_amount}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.location}</TableCell>
+                    <TableCell>{row.status}</TableCell>
+                    <TableCell>{row.Action}</TableCell>
+                  </TableRow>
+                  ))}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              )}
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    colSpan={3}
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        </Card>
+      )}
+    </>
   );
 }
