@@ -17,6 +17,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "./commonStyle.css";
 import { useState } from "react";
+import axios from "axios";
 
 const AdsPage = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -43,9 +44,20 @@ const AdsPage = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    await axios
+      .post("https://demo.emeetify.com:81/pet/ads", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      .then((response) => console.log(response))
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -117,13 +129,20 @@ const AdsPage = () => {
             <Stack style={{ marginLeft: "30%" }}>
               <Typography className="typography">Timer</Typography>
               <TextField size="small" className="textfield" />
-              <Typography className="typography" name="description" value={formData.description} onChange={handleInputChange}>Description</Typography>
+              <Typography
+                className="typography"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+              >
+                Description
+              </Typography>
               <TextareaAutosize
                 minRows={5}
                 size="small"
                 className="textfield"
               />
-              <Typography className="typography" >Link</Typography>
+              <Typography className="typography">Link</Typography>
               <TextField size="small" className="textfield" />
             </Stack>
           </Stack>

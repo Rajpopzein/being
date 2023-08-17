@@ -1,3 +1,5 @@
+/* ads page styles  */
+
 .textfield{
     width: 200%;
     margin-top: 5px;
@@ -20,4 +22,48 @@
     border-radius: 20px !important;
     color: #fff !important; 
     margin-left: 20px !important;
+}
+
+/* pet food and accessoceries styles  */
+
+.firstImg{
+    margin-top:-40px;
+    height:17rem;
+    width:30rem;
+    margin-left:-40px;
+}
+.imgTitle{
+    position:absolute;
+    bottom:150px;
+    left:80px;
+    color:#fff;
+    font-size:20px;
+}
+
+.imgProductCount{
+    position:absolute;
+    bottom:115px;
+    left:80px;
+    color:#fff;
+    font-size:20px;
+}
+.secondImg{
+    margin-top:-40px;
+    height:17rem;
+    width:30rem;
+    margin-left:-80px;
+}
+.imgThreshold{
+    position:absolute;
+    bottom:150px;
+    left:40px;
+    color:#fff;
+    font-size:20px;
+}
+.imgThresholdCount{
+    position:absolute;
+    bottom:115px;
+    left:40px !important;
+    color:#fff;
+    font-size:20px;
 }
