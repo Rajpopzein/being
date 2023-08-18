@@ -36,6 +36,10 @@ import users from '../resource/Web - Menu/Users.png';
 import feedback from '../resource/Web - Menu/Feedbacks.png'
 import Users from "./Users";
 import Feedback from "./Feedback";
+import Userdetails from "./UserDetails";
+// import { useNavigate } from "react-router-dom";
+
+
 const pageSelectionHandler = (dispatch, value) => {
   dispatch(selecterchange(value));
 };
@@ -360,6 +364,7 @@ export default function PersistentDrawerLeft() {
         {pages === 4 && <PetFoodAccessories />}
         {pages === 5 && <Users />}
         {pages === 6 && <Feedback />}
+        {pages === 7 && <Userdetails/>}
       </Main>
     </Box>
   );

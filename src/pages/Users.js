@@ -16,6 +16,8 @@ import Dropdownlist from "../components/DropDownlist";
 import { useTheme } from "@mui/material/styles";
 import { current } from '@reduxjs/toolkit';
 import { IconButton } from "@mui/material";
+import { sepuserdata } from "../redux/slice/UserDetailsslice";
+import { selecterchange } from "../redux/slice/pageselectionSlice";
 
 
 const ITEMS_PER_PAGE = 8; // Number of items to display per page
@@ -44,6 +46,11 @@ const UserGrid = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+
+  const handle_view_user = (udata) =>{
+    dispatch(sepuserdata(udata))
+    dispatch(selecterchange(7))
+  }
 
   return (
     <div style={{ paddingLeft: "32px" }}>
@@ -89,7 +96,7 @@ const UserGrid = () => {
             />
           </div>
         </div>
-        <div style={{ width: "15%", marginTop: "3%" }}>
+        <div style={{ width: "15%", marginTop: "2%" }}>
           <Dropdownlist />
         </div>
       </div>
@@ -109,6 +116,8 @@ const UserGrid = () => {
                   name={fullname}
                   location={location}
                   images={user.profile_pic}
+                  userdetails={user}
+                  cardfun={handle_view_user}
                 />
               </div>
             </Grid>

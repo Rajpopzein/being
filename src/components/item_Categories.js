@@ -17,6 +17,9 @@ import Loaders from "./loader";
 import { Height } from "@mui/icons-material";
 import axios from "axios";
 
+
+
+
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -50,6 +53,10 @@ function a11yProps(index) {
   };
 }
 
+
+
+
+
 export default function Item_Categories() {
   const [value, setValue] = React.useState(0);
 
@@ -58,7 +65,25 @@ export default function Item_Categories() {
   // const fulfilled = useSelector((state)=>{state.petsList.fulfilled})
   // const error = useSelector((state)=>{state.petsList.rejected})
 
-  const tabledata = useSelector((state) => state.petsList);
+  useEffect(() => {
+    if (value === 0) {
+      dispatch(petlistapi({type:'pet',filter:''}));
+    } else {
+      dispatch(petlistapi({type:'stock',filter:''}))
+    }
+  }, [value]);
+  
+  const tabledata = useSelector((state) => state.petsList)
+
+  const hanlde_filter = (e,  value) =>{
+    if (value === 0) {
+      const datatosent = {type:'pet',filter:e.target.value}
+      // const datatosentc = {...datatosent, filter:}
+      dispatch(petlistapi(datatosent));
+    } else {
+      dispatch(petlistapi({type:'stock',filter:e.target.value}))
+    }
+  }
 
   const columns_pets = [
     { field: "to_date", headerName: "Date", width: 120, height: 80 },
@@ -129,24 +154,7 @@ export default function Item_Categories() {
     },
   ];
 
-  // const tt = async() => {
-  //   const token = localStorage.getItem("token")
-  //   const data = await axios.get("https://demo.emeetify.com:81/pet/order/", {headers: {"x-access-token" : `${token}`}} )
-  //   return data
-  // }
-
-
-  // useEffect(()=>{
-  //  console.log("dd",tt())
-  // },[])
-
-  useEffect(() => {
-    if (value === 0) {
-      dispatch(petlistapi("pet"));
-    } else {
-      dispatch(petlistapi("stock"))
-    }
-  }, [value]);
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -182,6 +190,7 @@ export default function Item_Categories() {
               position: "relative",
               marginLeft: "20px",
             }}
+            onChange={(e)=>hanlde_filter(e,value)}
           ></input>
           <SearchIcon
             style={{

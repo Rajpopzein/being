@@ -4,7 +4,10 @@ import axios from "axios";
 
 
 export const petlistapi = createAsyncThunk("getapi/petlisr", async(value)=>{
-    const listdata = await axios.get(`https://demo.emeetify.com:81/pet/order/orderfilter?type=${value}&firstname=`)
+   const request = value
+    console.log("filter", value)
+    const listdata = await axios.get(`https://demo.emeetify.com:81/pet/order/orderfilter?type=${request.type}&firstname=${request.filter}`)
+    console.log("filter", listdata)
     return listdata
 })
 
@@ -25,7 +28,7 @@ const pet_slice = createSlice({
         }).addCase(petlistapi.fulfilled,(state, action)=>{
             state.loading = 'idle';
             state.petdata = action.payload
-            // console.log("action",action)
+            console.log("action",action)
         }).addCase(petlistapi.rejected,(state, action)=>{
             state.loading='error';
             state.error = action.error.message

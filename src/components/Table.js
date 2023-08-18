@@ -32,6 +32,7 @@ function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
+  console.log("pages", page)
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0);
   };
@@ -70,7 +71,7 @@ function TablePaginationActions(props) {
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1|| page === 0}
         aria-label="next page"
       >
         {theme.direction === "rtl" ? (
@@ -81,7 +82,7 @@ function TablePaginationActions(props) {
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1 || page === 0}
         aria-label="last page"
       >
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
@@ -119,7 +120,7 @@ export default function DataTable({ data, columns, index }) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - (rows !== undefined ? rows.length : 0)) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -154,8 +155,8 @@ export default function DataTable({ data, columns, index }) {
               </TableHead>
               {index === 0 ? (
                 <TableBody>
-                  {(rowsPerPage > 0
-                    ? rows.slice(
+                  {(rows !== undefined ) ? (rowsPerPage > 0
+                    ? rows?.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
@@ -172,7 +173,7 @@ export default function DataTable({ data, columns, index }) {
                     <TableCell>{row.status}</TableCell>
                     <TableCell>{row.Action}</TableCell>
                   </TableRow>
-                  ))}
+                  )):<TableBody></TableBody>}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -181,7 +182,7 @@ export default function DataTable({ data, columns, index }) {
                 </TableBody>
               ) : (
                 <TableBody>
-                  {(rowsPerPage > 0
+                  {(rows !== undefined )?(rowsPerPage > 0
                     ? rows.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
@@ -200,7 +201,7 @@ export default function DataTable({ data, columns, index }) {
                     <TableCell>{row.status}</TableCell>
                     <TableCell>{row.Action}</TableCell>
                   </TableRow>
-                  ))}
+                  )):<TableBody></TableBody>}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -217,8 +218,8 @@ export default function DataTable({ data, columns, index }) {
                       { label: "All", value: -1 },
                     ]}
                     colSpan={3}
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
+                    count={rows !== undefined ? rows?.length : 0}
+                    rowsPerPage={rows !== undefined ? rowsPerPage : 0}
                     page={page}
                     SelectProps={{
                       inputProps: {
