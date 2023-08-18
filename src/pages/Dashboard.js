@@ -91,7 +91,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft({children}) {
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pageSelector.page);
 
@@ -188,7 +188,7 @@ export default function PersistentDrawerLeft() {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 0)}
+              onClick={() => {navigate("/Dashboard");pageSelectionHandler(dispatch, 0)}}
             >
               <ListItemIcon>
               <img src={dashboard}  style={{height:"20px",width:"20px"}} className="sideImage" alt="DashboardImg" />
@@ -210,7 +210,7 @@ export default function PersistentDrawerLeft() {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 1)}
+              onClick={() => {navigate('/orders');pageSelectionHandler(dispatch, 1)}}
             >
               <ListItemIcon>
               <img src={order}  style={{height:"20px",width:"20px"}} className="sideImage" alt="OrderImg" />
@@ -259,7 +259,7 @@ export default function PersistentDrawerLeft() {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 3)}
+              onClick={() => {navigate("/ads");pageSelectionHandler(dispatch, 3)}}
             >
               <ListItemIcon>
                 <img
@@ -313,7 +313,7 @@ export default function PersistentDrawerLeft() {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 5)}
+              onClick={() => {navigate("/users"); pageSelectionHandler(dispatch, 5)}}
             >
               <ListItemIcon>
                 <img
@@ -357,14 +357,16 @@ export default function PersistentDrawerLeft() {
       </Drawer>
       <Main open={open} sx={{ paddingTop: "3rem" }}>
         <DrawerHeader />
-        {pages === 0 && <DashboardItem />}
+        {/* {pages === 0 && <DashboardItem />}
         {pages === 1 && <OrdersPage />}
         {pages === 2 && <PostPage />}
         {pages === 3 && <AdsPage />}
         {pages === 4 && <PetFoodAccessories />}
         {pages === 5 && <Users />}
         {pages === 6 && <Feedback />}
-        {pages === 7 && <Userdetails/>}
+        {pages === 7 && <Userdetails/>} */}
+        {children}
+        {console.log("chi",children)}
       </Main>
     </Box>
   );

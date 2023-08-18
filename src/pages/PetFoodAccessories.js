@@ -19,8 +19,10 @@ import axios from "axios";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { DataGrid } from "@mui/x-data-grid";
 import CommonTable from "../components/CommonTable";
+import PersistentDrawerLeft from "./Dashboard";
 const PetFoodAccessories = () => {
-  const [data, setData] = useState([]);
+  const Returnfun = () =>{
+    const [data, setData] = useState([]);
   const [petData, setPetData] = useState([]);
   useEffect(() => {
     axios
@@ -120,6 +122,11 @@ const columns =[
       </Card>
     </>
   );
+  }
+
+  return(
+    <PersistentDrawerLeft><Returnfun/></PersistentDrawerLeft>
+  )
 };
 
 export default PetFoodAccessories;

@@ -19,11 +19,15 @@ import { IconButton } from "@mui/material";
 import { sepuserdata } from "../redux/slice/UserDetailsslice";
 import { selecterchange } from "../redux/slice/pageselectionSlice";
 
+import PersistentDrawerLeft from "../pages/Dashboard"
+
 
 const ITEMS_PER_PAGE = 8; // Number of items to display per page
 
 const UserGrid = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const Returnfun = () =>{
+    const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAlluser());
@@ -146,6 +150,12 @@ const UserGrid = () => {
     </div>
     </div>
   );
+  }
+
+  return(
+    <PersistentDrawerLeft>{<Returnfun/>}</PersistentDrawerLeft>
+  )
+  
 };
 
 export default UserGrid;
