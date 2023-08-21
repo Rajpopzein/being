@@ -1,6 +1,4 @@
 import FirstPageIcon from "@mui/icons-material/FirstPage";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import React, { useState,useEffect } from 'react';
 import { Grid } from '@mui/material';
@@ -20,17 +18,21 @@ import { sepuserdata } from "../redux/slice/UserDetailsslice";
 import { selecterchange } from "../redux/slice/pageselectionSlice";
 
 import PersistentDrawerLeft from "../pages/Dashboard"
+import { useNavigate } from "react-router-dom";
 
 
 const ITEMS_PER_PAGE = 8; // Number of items to display per page
 
 const UserGrid = () => {
 
+  const navigation = useNavigate()
+
   const Returnfun = () =>{
     const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAlluser());
+    dispatch(selecterchange(5))
   }, []);
 
   const theme = useTheme()
@@ -51,9 +53,13 @@ const UserGrid = () => {
     setCurrentPage(newPage);
   };
 
+  let dd = null
+
   const handle_view_user = (udata) =>{
-    dispatch(sepuserdata(udata))
-    dispatch(selecterchange(7))
+    console.log("ud",udata)
+    dd = udata
+    console.log("dd", dd)
+    navigation("/userdetails",{state:udata})
   }
 
   return (
@@ -120,7 +126,7 @@ const UserGrid = () => {
                   name={fullname}
                   location={location}
                   images={user.profile_pic}
-                  userdetails={user}
+                  userid={user}
                   cardfun={handle_view_user}
                 />
               </div>

@@ -238,6 +238,16 @@
 }
 
 
+.arrowbutton{
+  display: flex;
+}
+
+.multi_heading_remove{
+  display: flex;
+  justify-content: space-between;
+}
+
+
 @media only screen and (max-width: 1096px) {
   .post-cards {
     flex-direction: column;

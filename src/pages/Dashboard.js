@@ -232,7 +232,7 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 2)}
+              onClick={() => {navigate("/post");pageSelectionHandler(dispatch, 2)}}
             >
               <ListItemIcon>
                 <img
@@ -286,7 +286,7 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 4)}
+              onClick={() => {navigate("/foodandaccessories");pageSelectionHandler(dispatch, 4)}}
             >
               <ListItemIcon>
                 <img
@@ -340,7 +340,7 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => pageSelectionHandler(dispatch, 6)}
+              onClick={() => {navigate('/feedback');pageSelectionHandler(dispatch, 6)}}
             >
               <ListItemIcon>
                 <img

@@ -1,0 +1,17 @@
+.single_user_details{
+    margin-top: 1rem;
+    display: flex;
+}
+.detailsofuser{
+    margin:1.5rem 2rem;
+}
+.detailsofuser > h3 {
+    margin-bottom: 1rem;
+}
+.detailsofuser > p {
+    margin-bottom: -0px;
+}
+.usersdetatailsaddress{
+    margin-top: 3rem;
+    margin-left: 2rem;
+}

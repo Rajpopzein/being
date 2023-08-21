@@ -11,6 +11,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { fetchuser } from "../redux/slice/api_Slice"
 import PersistentDrawerLeft from "./Dashboard"
+import { selecterchange } from "../redux/slice/pageselectionSlice";
 
 const OrdersPage = () => {
     
@@ -18,6 +19,7 @@ const OrdersPage = () => {
         const dispatch = useDispatch()
         useEffect(()=>{
             dispatch(fetchuser())
+            dispatch(selecterchange(1))
         },[])
     
         const card_datas = useSelector((state)=>state.dashapi)

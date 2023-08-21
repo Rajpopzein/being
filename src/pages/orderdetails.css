@@ -1,0 +1,56 @@
+.Orderid{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2px;
+    margin-bottom: 1rem;
+    
+}
+.statusbutton{
+    
+    display: flex;
+    justify-content: space-between !important;
+}
+.buttonsorder{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.statusbutton > Button{
+    margin: 1rem 0rem;
+}
+.ordersuserdetails{
+    display: flex;
+    font-size: 15px !important;
+}
+.order_user_details{
+    margin-left: 1.5rem;
+}
+.username_order{
+    text-decoration: underline;
+    color: #1231cd;
+}
+.ordersuserdetails_button{
+    margin-top: 1rem !important;
+    width: 10rem;
+    border-radius: 14px !important;
+    background-image: linear-gradient(to right top, #2b70d5, #3b81dd, #4e92e4, #62a3ea, #77b3f0) !important;
+    color: #fff !important;
+    border: 0px !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+}
+.ordersuserdetails_address{
+    margin-top: 1.5rem;
+}
+.orderspagefontp{
+    font-size: 25px;
+}
+.ordersuserdetails_address{
+    display: flex;
+}
+.orderspagedeliveryadd{
+    font-size: 20px;
+    margin-left: 1rem;
+    margin-top: 3px;
+}

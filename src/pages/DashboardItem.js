@@ -15,12 +15,11 @@ import axios from "axios";
 import { fetchuser } from "../redux/slice/api_Slice";
 import { useDispatch } from "react-redux";
 import PersistentDrawerLeft from "./Dashboard"
-
-
-
+import { selecterchange } from "../redux/slice/pageselectionSlice";
 
 
 const Returnfunction = ({userdata, fullname, dashboardData, userdatass}) =>{
+
   return(
     <div>
     <div className="datesec">
@@ -192,6 +191,7 @@ const Returnfunction = ({userdata, fullname, dashboardData, userdatass}) =>{
 
 
 const DashboardItem = () => {
+  
   const userdata = useSelector((state) => state.userdetails);
   console.log(userdata, "ud");
   const fullname =
@@ -212,6 +212,7 @@ const DashboardItem = () => {
       .then((dataSet) => {
         setDashboardData(dataSet);
       });
+      dispatch(selecterchange(0))
   }, []);
 
 

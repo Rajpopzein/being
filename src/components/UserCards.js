@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { selecterchange } from '../redux/slice/pageselectionSlice';
 import { useEffect } from 'react';
 
-export default function UserCards({name,location,images,userdetails, cardfun}) {
+export default function UserCards({name,location,images,userid, cardfun}) {
  
 
   const dispatch = useDispatch()
@@ -44,7 +44,7 @@ export default function UserCards({name,location,images,userdetails, cardfun}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button  size="small" onClick={()=> cardfun(userdetails)}>View</Button>
+        <Button  size="small" onClick={()=> cardfun(userid)}>View</Button>
       </CardActions>
     </Card>
   );

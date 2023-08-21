@@ -23,6 +23,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import Loaders from "./loader";
 import { useEffect } from "react";
+import { Button } from "rsuite";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
 
@@ -30,9 +32,8 @@ let rows = ""
 
 function TablePaginationActions(props) {
   const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
+  const { count, page, rowsPerPage, onPageChange, emptyRows } = props;
 
-  console.log("pages", page)
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0);
   };
@@ -71,7 +72,7 @@ function TablePaginationActions(props) {
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1|| page === 0}
+        disabled={emptyRows ===0 || page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
         {theme.direction === "rtl" ? (
@@ -82,7 +83,7 @@ function TablePaginationActions(props) {
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1 || page === 0}
+        disabled={emptyRows === 0 || page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
@@ -96,13 +97,23 @@ TablePaginationActions.propTypes = {
   onPageChange: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
+  emptyRows: PropTypes.number.isRequired,
 };
 
 // function createData(name, calories, fat) {
 //   return { name, calories, fat };
 // }
 
-export default function DataTable({ data, columns, index }) {
+
+
+const Actionbutton = ({fun, data}) =>{
+  return(
+    <MoreHorizIcon onClick={()=> fun(data)}/>
+  )
+}
+
+
+export default function DataTable({ data, columns, index , clickfun}) {
   const [loadervalue, setloader] = React.useState(true);
 
   useEffect(() => {
@@ -115,8 +126,11 @@ export default function DataTable({ data, columns, index }) {
       }, 3000);
     }
   }, [data]);
+
+
+
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -134,7 +148,7 @@ export default function DataTable({ data, columns, index }) {
   //mapping data into array
   rows = data?.petdata?.data?.data;
 
-  console.log("row", rows)
+  // console.log("row", rows)
  
   // }
 
@@ -162,7 +176,7 @@ export default function DataTable({ data, columns, index }) {
                       )
                     : rows
                   ).map((row) => (
-                    <TableRow key={row.id[0]}>
+                    <TableRow key={row.id[0]} >
                     <TableCell>{row.to_date}</TableCell>
                     <TableCell>{row.order_id}</TableCell>
                     <TableCell>{row.Category}</TableCell>
@@ -171,7 +185,7 @@ export default function DataTable({ data, columns, index }) {
                     <TableCell>{row.name}</TableCell>
                     <TableCell>{row.location}</TableCell>
                     <TableCell>{row.status}</TableCell>
-                    <TableCell>{row.Action}</TableCell>
+                    <TableCell><Actionbutton fun={clickfun} data={row}/></TableCell>
                   </TableRow>
                   )):<TableBody></TableBody>}
                   {emptyRows > 0 && (
@@ -209,10 +223,12 @@ export default function DataTable({ data, columns, index }) {
                   )}
                 </TableBody>
               )}
+              
               <TableFooter>
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[
+                      5,
                       10,
                       25,
                       { label: "All", value: -1 },
@@ -230,6 +246,7 @@ export default function DataTable({ data, columns, index }) {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                     ActionsComponent={TablePaginationActions}
+                    emptyRows = {emptyRows}
                   />
                 </TableRow>
               </TableFooter>

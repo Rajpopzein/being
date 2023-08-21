@@ -20,6 +20,11 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { DataGrid } from "@mui/x-data-grid";
 import CommonTable from "../components/CommonTable";
 import PersistentDrawerLeft from "./Dashboard";
+import { useDispatch } from "react-redux";
+import { selecterchange } from "../redux/slice/pageselectionSlice";
+
+
+
 const PetFoodAccessories = () => {
   const Returnfun = () =>{
     const [data, setData] = useState([]);
@@ -53,6 +58,11 @@ const columns =[
 
   const tableHeight = '400px';
   const apiUrl = "https://demo.emeetify.com:81/pet/stocks/";
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(selecterchange(4))
+  },[])
   return (
     <>
       <h4 style={{ marginLeft: "50px", fontWeight: "600" }}>

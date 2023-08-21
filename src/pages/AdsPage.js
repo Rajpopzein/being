@@ -19,11 +19,16 @@ import "./commonStyle.css";
 import { useState } from "react";
 import axios from "axios";
 import PersistentDrawerLeft from "./Dashboard"
+import { useDispatch } from "react-redux";
+import { selecterchange } from "../redux/slice/pageselectionSlice";
+import { useEffect } from "react";
 
 const AdsPage = () => {
-
-
   const Returndata = () => {
+    const dispatch = useDispatch()
+    useEffect(()=>{
+      dispatch(selecterchange(3))
+    },[])
     const Item = styled(Paper)(({ theme }) => ({
       backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
       ...theme.typography.body2,

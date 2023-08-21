@@ -16,6 +16,7 @@ import { BoxLoading } from "react-loadingg";
 import Loaders from "./loader";
 import { Height } from "@mui/icons-material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -59,12 +60,13 @@ function a11yProps(index) {
 
 export default function Item_Categories() {
   const [value, setValue] = React.useState(0);
-
+  
   const dispatch = useDispatch();
   // const pending = useSelector((state)=>{state.petsList.pending})
   // const fulfilled = useSelector((state)=>{state.petsList.fulfilled})
   // const error = useSelector((state)=>{state.petsList.rejected})
 
+  const navigate = useNavigate()
   useEffect(() => {
     if (value === 0) {
       dispatch(petlistapi({type:'pet',filter:''}));
@@ -163,6 +165,12 @@ export default function Item_Categories() {
     console.log("chj");
   };
 
+  const handlecardclick = (carddata) =>{
+      // console.log("clicking", carddata)
+      navigate("/orderdetails", {state:carddata})
+
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <Box
@@ -206,7 +214,7 @@ export default function Item_Categories() {
         </div>
       </div>
       <CustomTabPanel value={value} onChange={handleChangedata} index={0}>
-        <DataTable data={tabledata} columns={columns_pets} index={0}/>
+        <DataTable data={tabledata} columns={columns_pets} clickfun ={handlecardclick} index={0}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       <DataTable data={tabledata} columns={columns_stock} index={1}/>
