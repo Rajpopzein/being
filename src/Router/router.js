@@ -11,6 +11,7 @@ import PetFoodAccessories from "../pages/PetFoodAccessories";
 import PostPage from "../pages/PostPage";
 import Feedback from "../pages/Feedback";
 import Orders_details from "../pages/Orders_details";
+import AddUser from "../pages/AddUser";
 
 
 
@@ -28,6 +29,7 @@ const Router = () =>{
             <Route path="/post" element={<PostPage/>}/>
             <Route path="/feedback" element={<Feedback/>}/>
             <Route path="/orderdetails" element={<Orders_details/>}/>
+            <Route path="/adduser" element={<AddUser/>}/>
         </Routes>
     )
 }

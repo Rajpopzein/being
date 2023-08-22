@@ -247,6 +247,38 @@
   justify-content: space-between;
 }
 
+/* .singletablebody > tr > td{
+  padding: 20px 45px !important;
+} */
+
+.css-15eacsa-MuiTable-root{
+  padding: 1rem !important;
+}
+
+.css-jmnteo-MuiTableHead-root tr{
+  padding: 4rem !important;
+}
+
+.imageandbtn{
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+}
+.formfields{
+  margin: 0px 20px;
+}
+
+.formfields > label {
+  margin-left: 1rem !important;
+  color: '#b0aeae' !important;
+}
+
+.formfields > .formcontrolfield{
+  background-color: #f6f6f6 !important;
+  border: 0px !important;
+  border-color: #fff !important;
+  border-radius: 20px !important;
+}
 
 @media only screen and (max-width: 1096px) {
   .post-cards {

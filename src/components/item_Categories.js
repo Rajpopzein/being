@@ -171,6 +171,11 @@ export default function Item_Categories() {
 
   }
 
+
+  const handleplaceorder = (e) => {
+      navigate('/placeorder')
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <Box

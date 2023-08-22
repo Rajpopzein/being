@@ -6,9 +6,7 @@ import Loader from 'rsuite/Loader';
 
 const Loaders = ()=>{
     return(
-        <div>
-        {/* <Placeholder.Paragraph rows={8} />
-        <Loader center content="loading" /> */}
+        <div style={{position:'absolute',top:'50%', left:'50%'}}>
         <BoxLoading/>
       </div>
     )

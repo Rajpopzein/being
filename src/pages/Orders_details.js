@@ -10,7 +10,7 @@ import "./orderdetails.css";
 import Button from "@mui/material/Button";
 import Avatar from '@mui/material/Avatar';
 import { singleUser } from "../redux/slice/AlluserSlice";
-import DataTable from "../components/Table";
+import SingleTable from "../components/SingleTable";
 
 
 const Orders_details = () => {
@@ -121,7 +121,7 @@ const Orders_details = () => {
               <p className="orderspagedeliveryadd">{userdata.data?.data[0]?.address + ","+ userdata?.data?.data[0]?.city+","+ userdata?.data?.data[0]?.country}</p>
         </div>
         <div className="tableforsep_order">
-              
+              <SingleTable tdata={data}/>
         </div>
       </Card>
     </PersistentDrawerLeft>

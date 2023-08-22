@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
 import { selecterchange } from '../redux/slice/pageselectionSlice';
 import { useEffect } from 'react';
+import { Avatar } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import './style.css'
 
 export default function UserCards({name,location,images,userid, cardfun}) {
  
@@ -28,24 +31,19 @@ export default function UserCards({name,location,images,userid, cardfun}) {
   
 
   return (
-    <Card sx={{ maxWidth: 345, borderRadius:'10px' }}>
-      <CardMedia
-        component="img"
-        alt={name}
-        height="180"
-        image={`https://demo.emeetify.com:5016/${images}`}
-      />
+    <Card sx={{ Width: 345, borderRadius:'10px', padding:'5px 15px' }}>
+      <div className='imageandbtn'>
+        <Avatar src={`https://demo.emeetify.com:5016/${images}`} alt={name} sx={{width:85, height: 85}}/>
+        <MoreVertIcon onClick={()=>cardfun(userid)}/>
+      </div>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="p" sx={{fontSize:'20px'}} component="div">
             {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {location}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button  size="small" onClick={()=> cardfun(userid)}>View</Button>
-      </CardActions>
     </Card>
   );
 }

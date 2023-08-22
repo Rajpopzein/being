@@ -20,6 +20,8 @@ import { selecterchange } from "../redux/slice/pageselectionSlice";
 import PersistentDrawerLeft from "../pages/Dashboard"
 import { useNavigate } from "react-router-dom";
 
+import Loaders from "../components/loader";
+import CustomButton from "../components/Custombutton";
 
 const ITEMS_PER_PAGE = 8; // Number of items to display per page
 
@@ -46,7 +48,9 @@ const UserGrid = () => {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const itemsToDisplay = userdata?.data?.data.slice(startIndex, endIndex);
 
-//   console.log("item",itemsToDisplay)
+  // console.log("item",itemsToDisplay)
+
+  
 
   // Function to handle page navigation
   const handlePageChange = (newPage) => {
@@ -60,6 +64,10 @@ const UserGrid = () => {
     dd = udata
     console.log("dd", dd)
     navigation("/userdetails",{state:udata})
+  }
+
+  const handle_newuser = () => {
+      navigation('/adduser')
   }
 
   return (
@@ -108,19 +116,24 @@ const UserGrid = () => {
         </div>
         <div style={{ width: "15%", marginTop: "2%" }}>
           <Dropdownlist />
+          <div style={{marginTop:'12px', marginLeft:'17px'}}>
+            <CustomButton name={"Add User"} handleclick={handle_newuser} />
+          </div>
         </div>
       </div>
-      <div className='userscardsections'>
+
+      {userdata.loading !== 'pending' & userdata.data !== null ?   <div className='userscardsections'>
       <Grid
         container
         rowSpacing={2}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 'auto' }}
       >
         {itemsToDisplay?.map((user) => {
-          const fullname = user.firstname + ' ' + user.lastname;
-          const location = user.city + ', ' + user.country;
+          console.log("udd", user)
+          const fullname = user?.firstname + ' ' + user?.lastname;
+          const location = user?.city + ', ' + user?.country;
           return (
-            <Grid item xs={12} lg={3} key={user.id}>
+            <Grid item xs={12} lg={3} key={user?.id}>
               <div style={{ width: '100%' }}>
                 <UserCards
                   name={fullname}
@@ -135,7 +148,7 @@ const UserGrid = () => {
         })}
       </Grid>
 
-      {/* Pagination controls */}
+      
       <div style={{marginTop:'20px', float:'left'}}>
       <IconButton
         onClick={()=>handlePageChange(currentPage -1)}
@@ -153,7 +166,11 @@ const UserGrid = () => {
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
       </div>
-    </div>
+    </div> : <Loaders/>}
+
+
+
+    
     </div>
   );
   }

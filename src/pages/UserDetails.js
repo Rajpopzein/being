@@ -39,23 +39,23 @@ const Userdetails = () => {
           <div className="single_user_details">
             <Avatar
               alt="Remy Sharp"
-              src={`https://demo.emeetify.com:5016/${userdata.profile_pic}`}
+              src={`https://demo.emeetify.com:5016/${userdata?.profile_pic}`}
               sx={{ width: 100, height: 100, marginTop:'1.7rem'}}
             />
             <div className="detailsofuser">
-              <h3>{userdata.firstname + " " + userdata.lastname}</h3>
-              <p>{userdata.mobile_no}</p>
-              <p>{userdata.email}</p>
+              <h3>{userdata?.firstname + " " + userdata?.lastname}</h3>
+              <p>{userdata?.mobile_no}</p>
+              <p>{userdata?.email}</p>
             </div>
           </div>
           <div className="usersdetatailsaddress">
             <h5>Address</h5>
             <p style={{ width: "5rem" }}>
-              {userdata.address + "," + userdata.city + "," + userdata.country}
+              {userdata?.address + "," + userdata?.city + "," + userdata?.country}
             </p>
           </div>
-          <Addresscard Title={"Home"} Address={userdata.address + "," + userdata.city + "," + userdata.country}/>
-          <Addresscard Title={"Office"} Address={userdata.address + "," + userdata.city + "," + userdata.country}/>
+          <Addresscard Title={"Home"} Address={userdata?.address + "," + userdata?.city + "," + userdata?.country}/>
+          <Addresscard Title={"Office"} Address={userdata?.address + "," + userdata?.city + "," + userdata?.country}/>
         </Card>
       </div>
     </PersistentDrawerLeft>
