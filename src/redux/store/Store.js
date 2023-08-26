@@ -7,6 +7,10 @@ import pageSelector from "../slice/pageselectionSlice";
 import { petreducer } from "../slice/petsApislice";
 import {getallusercalls, getsingleusersetails} from "../slice/AlluserSlice";
 import UserDetailsslice from "../slice/UserDetailsslice";
+import { county, states,district } from "../slice/countryslice";
+import { address_slices } from "../slice/Address";
+import { feedbackslices } from "../slice/FeedBackSlice";
+
 
 
 const persistconfig = {
@@ -31,7 +35,13 @@ const store = configureStore({
         petsList : petreducer,
         Alluser : getallusercalls,
         sepuser : UserDetailsslice,
-        singleuserdetails : getsingleusersetails
+        singleuserdetails : getsingleusersetails,
+        country: county,
+        state : states,
+        district : district,
+        address: address_slices,
+        feedback: feedbackslices,
+        
     } 
 })
 

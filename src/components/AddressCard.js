@@ -3,7 +3,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import './style.css'
 
 
-const Addresscard = ({Title, Address}) => {
+const Addresscard = ({Title, Address,fun,singledata}) => {
     return (
       <Card
         variant="outlined"
@@ -13,9 +13,9 @@ const Addresscard = ({Title, Address}) => {
           <div>
             <h5>{Title}</h5>
           </div>
-          <div style={{display:"flex"}}>
+          <div style={{display:"flex"}} >
               <h6 style={{fontWeight:"400", marginTop:'2px', marginRight:'2px'}}>Remove</h6>
-              <ClearIcon/>
+              <ClearIcon onClick={()=>fun(singledata)}/>
           </div>
         </div>
         <div className="multi_address_section">

@@ -179,7 +179,7 @@ export default function Item_Categories() {
   return (
     <Box sx={{ width: "100%" }}>
       <Box
-        sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}
+        sx={{ width: "100%", display: "flex", justifyContent: "space-between" , marginBottom:'30px'}}
       >
         <Tabs value={value} onChange={handleChange} aria-label="Categories tab">
           <Tab label="Pets" {...a11yProps(0)} />
@@ -215,7 +215,7 @@ export default function Item_Categories() {
           />
         </div>
         <div className="Place_order_btn">
-          <button placeholder="Place order">Place Order</button>
+          <button placeholder="Place order" onClick={handleplaceorder}>Place Order</button>
         </div>
       </div>
       <CustomTabPanel value={value} onChange={handleChangedata} index={0}>

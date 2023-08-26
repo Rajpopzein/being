@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 
 import Loaders from "../components/loader";
 import CustomButton from "../components/Custombutton";
+import axios from "axios";
 
 const ITEMS_PER_PAGE = 8; // Number of items to display per page
 
@@ -70,12 +71,25 @@ const UserGrid = () => {
       navigation('/adduser')
   }
 
+  const config = {
+    headers: {
+      "x-access-token": localStorage.getItem("token"),
+      "x-refresh-token": localStorage.getItem("refresh_token"),
+    },
+  };
+
+  const handledelete = async(id) => {
+      
+      const responce = await axios.delete(`https://demo.emeetify.com:81/pet/users/${id}`, config).then(()=>dispatch(getAlluser()))
+      console.log("dalete", responce)
+  }
+
   return (
     <div style={{ paddingLeft: "32px" }}>
-        <h2>Users</h2>
+        <h2 style={{marginLeft: "5px"}}>Users</h2>
         <Card
         className="userCards"
-        sx={{ width: "600px", position: "relative" }}
+        sx={{ width: "600px", position: "relative", paddingLeft:'-3px' }}
         elevation={0}
       >
         <img
@@ -101,7 +115,7 @@ const UserGrid = () => {
                 backgroundColor: "#f4f3f5",
                 border: "0px",
                 position: "relative",
-                marginLeft: "20px",
+                marginLeft: "5px",
               }}
             ></input>
             <SearchIcon
@@ -114,9 +128,9 @@ const UserGrid = () => {
             />
           </div>
         </div>
-        <div style={{ width: "15%", marginTop: "2%" }}>
+        <div style={{ width: "15%" }}>
           <Dropdownlist />
-          <div style={{marginTop:'12px', marginLeft:'17px'}}>
+          <div style={{marginTop:'12px'}}>
             <CustomButton name={"Add User"} handleclick={handle_newuser} />
           </div>
         </div>
@@ -129,9 +143,9 @@ const UserGrid = () => {
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 'auto' }}
       >
         {itemsToDisplay?.map((user) => {
-          console.log("udd", user)
+        
           const fullname = user?.firstname + ' ' + user?.lastname;
-          const location = user?.city + ', ' + user?.country;
+          const location = user?.city + ', '+user?.state+',' + user?.country;
           return (
             <Grid item xs={12} lg={3} key={user?.id}>
               <div style={{ width: '100%' }}>
@@ -141,6 +155,7 @@ const UserGrid = () => {
                   images={user.profile_pic}
                   userid={user}
                   cardfun={handle_view_user}
+                  deletefun = {handledelete}
                 />
               </div>
             </Grid>

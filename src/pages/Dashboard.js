@@ -366,7 +366,7 @@ export default function PersistentDrawerLeft({children}) {
         {pages === 6 && <Feedback />}
         {pages === 7 && <Userdetails/>} */}
         {children}
-        {console.log("chi",children)}
+        
       </Main>
     </Box>
   );

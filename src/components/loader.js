@@ -1,14 +1,15 @@
 import { BoxLoading, WindMillLoading } from 'react-loadingg';
 import { Placeholder } from 'rsuite';
 import Loader from 'rsuite/Loader'; 
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
 const Loaders = ()=>{
     return(
-        <div style={{position:'absolute',top:'50%', left:'50%'}}>
-        <BoxLoading/>
-      </div>
+        
+        <CircularProgress disableShrink  sx={{width:'100%', height:'100%'}}/>
+      
     )
 
 }

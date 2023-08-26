@@ -4,16 +4,18 @@ import PersistentDrawerLeft from "./Dashboard";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import './Adduser.css'
 import UserForm from "../components/userForm";
-import ValidationSchemaExample  from "../components/formic";
+import UserFormFormik  from "../components/formic";
+
 
 const AddUser = () => {
+
   return (
     <PersistentDrawerLeft>
       <Arrowbutton navigation={"/users"} />
       <h2>Add User</h2>
       <Card sx={{ padding: "3rem" }}>
         {/* <UserForm/> */}
-        <ValidationSchemaExample/>
+        <UserFormFormik/>
       </Card>
     </PersistentDrawerLeft>
   );

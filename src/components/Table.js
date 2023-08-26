@@ -25,6 +25,7 @@ import Loaders from "./loader";
 import { useEffect } from "react";
 import { Button } from "rsuite";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import './style.css'
 
 
 
@@ -169,6 +170,7 @@ export default function DataTable({ data, columns, index , clickfun}) {
               </TableHead>
               {index === 0 ? (
                 <TableBody>
+                  
                   {(rows !== undefined ) ? (rowsPerPage > 0
                     ? rows?.slice(
                         page * rowsPerPage,
@@ -176,7 +178,7 @@ export default function DataTable({ data, columns, index , clickfun}) {
                       )
                     : rows
                   ).map((row) => (
-                    <TableRow key={row.id[0]} >
+                    <TableRow sx={{marginTop:'2rem'}} key={row.id[0]} >
                     <TableCell>{row.to_date}</TableCell>
                     <TableCell>{row.order_id}</TableCell>
                     <TableCell>{row.Category}</TableCell>
@@ -198,16 +200,14 @@ export default function DataTable({ data, columns, index , clickfun}) {
                 <TableBody>
                   {(rows !== undefined )?(rowsPerPage > 0
                     ? rows.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
+                        page * rowsPerPage, page * rowsPerPage + rowsPerPage
                       )
                     : rows
                   ).map((row) => (
                     <TableRow key={row.id[0]}>
                     <TableCell>{row.updated_at}</TableCell>
                     <TableCell>{row.order_id}</TableCell>
-                    <TableCell>{row.avail_qty
-}</TableCell>
+                    <TableCell>{row.avail_qty}</TableCell>
                     {/* <TableCell>{row.breed}</TableCell> */}
                     <TableCell>{row.total_amount}</TableCell>
                     <TableCell>{row.name}</TableCell>

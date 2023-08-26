@@ -46,6 +46,7 @@ function App() {
         console.log("dd",dd)
         if (dd?.data?.token) {
           localStorage.setItem("token", dd?.data?.token);
+          localStorage.setItem("refresh_token", dd?.data?.refresh_token)
         }
       });
 
