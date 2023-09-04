@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode'
 
 const Returnfunction = ({ userdata, fullname, dashboardData, userdatass }) => {
+  const navigate = useNavigate()
   return (
     <div>
       <div className="datesec">
@@ -62,7 +63,7 @@ const Returnfunction = ({ userdata, fullname, dashboardData, userdatass }) => {
                     <Avatars avadata={userdatass?.userdata?.petAddedBy} />
                   </div>
                   <div className="collection-button">
-                    <button>View All</button>
+                    <button onClick={()=>navigate('/post')}><h5>View All</h5></button>
                   </div>
                 </div>
               </Card>
@@ -176,8 +177,8 @@ const Returnfunction = ({ userdata, fullname, dashboardData, userdatass }) => {
                   <div className="collection-icon-newpost">
                     <Avatars avadata={userdatass?.userdata?.orderAddedBy} />
                   </div>
-                  <div className="collection-button">
-                    <button>View All</button>
+                  <div className="collection-button" style={{marginLeft:'-33px'}}>
+                    <button><h5>View All</h5></button>
                   </div>
                 </div>
               </Card>
@@ -199,7 +200,7 @@ const DashboardItem = () => {
   const dispatch = useDispatch();
   const userdatass = useSelector((state) => state?.dashapi);
   const errordatas = useSelector((state) => state?.api?.error);
-  const navigate = useNavigate()
+  
 
 
 

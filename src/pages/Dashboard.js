@@ -305,7 +305,7 @@ export default function PersistentDrawerLeft({children}) {
               <ListItemText primary={"Post"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ margin: "25px 0px" }}>
+          {/* <ListItem disablePadding sx={{ margin: "25px 0px" }}>
             <ListItemButton
               sx={
                 pages === 3
@@ -331,7 +331,7 @@ export default function PersistentDrawerLeft({children}) {
               </ListItemIcon>
               <ListItemText primary={"Ads"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           <ListItem disablePadding sx={{ margin: "25px 0px" }}>
             <ListItemButton
               sx={
