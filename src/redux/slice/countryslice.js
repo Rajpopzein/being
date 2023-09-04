@@ -51,8 +51,6 @@ const countryslices = createSlice({
 
 })
 
-
-
 const Stateslices = createSlice({
     name:'stateapi',
     initialState:{

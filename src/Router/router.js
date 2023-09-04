@@ -15,6 +15,9 @@ import AddUser from "../pages/AddUser";
 import EditUser from "../pages/Edituser";
 import Placeorder from "../pages/Placeorde";
 import AddProduct from "../pages/AddProduct";
+import ProductDetails from "../pages/ProductDetails";
+import ViewPost from "../pages/ViewPost";
+import Addpost from "../pages/AddPost";
 
 
 
@@ -36,6 +39,9 @@ const Router = () =>{
             <Route path="/edituser" element={<EditUser/>}/>
             <Route path="/placeorder" element={<Placeorder/>}/>
             <Route path="/addproduct" element={<AddProduct/>}/>
+            <Route path="/productdetails" element={<ProductDetails/>}/>
+            <Route path="/viewpost" element={<ViewPost/>}/>
+            <Route path="/addpost" element={<Addpost/>}/>
         </Routes>
     )
 }

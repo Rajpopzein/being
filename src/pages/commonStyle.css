@@ -67,3 +67,96 @@
     color:#fff;
     font-size:20px;
 }
+
+.petDetails_usertbl{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.petDetails_usertbl table tr td .petdetailusertbltitle{
+    font-size: 18px;
+    margin-right: 1rem;
+    margin-top: 10px;
+    font-weight: 600;
+    
+}
+.petDetails_usertbl table tr td p {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.petDetails_usertbl table tr{
+    margin-bottom: -15px !important;
+}
+
+.petDetails_rightside .petDetails_h6{
+    color: rgb(168, 168, 168);
+    font-weight: 535 !important;
+}
+.petDetails_rightside h6{
+    text-align: end;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+.petdetails_user{
+  margin-top: 2rem;
+
+}
+.petdetails_user_details{
+    display: flex;
+}
+.petdetails_user_data{
+    font-size: 20px;
+}
+.petdetails_user_productimg{
+    margin-top: -6.5rem;
+}
+.petdetailstbldata{
+    display: flex;
+    margin-top: 4rem;
+}
+.petdetailstbldata table tr td p{
+    font-size: 18px;
+    margin-left: 20px; 
+    margin-top: -15px;
+}
+
+.PetdataTable{
+    color:  rgb(168, 168, 168);
+}
+.headingpets{
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.postbuttons{
+    margin-top: 3rem;
+}
+.postbuttons button{
+    padding: 0.5rem;
+    width: 10rem;
+    border-radius: 1rem;
+    border: 0px;
+}
+.postbuttonsubmit{
+    color: #fff;
+    background-color: #609fe8;
+}
+
+
+
+.iframe-container.hovered::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 40%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the background color */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .iframe-container:hover::after {
+    opacity: 1;
+  }

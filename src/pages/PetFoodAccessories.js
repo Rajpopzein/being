@@ -42,6 +42,13 @@ const PetFoodAccessories = () => {
         .catch((e) => console.log(e));
     }, []);
 
+
+    const handleaction = (data) => {
+      console.log("action",data)
+      navigate("/productdetails",{state:data}) //data need to send
+    }
+
+
     const Actionbutton = ({ fun, data }) => {
       return <MoreHorizIcon onClick={() => fun(data)} />;
     };
@@ -172,13 +179,13 @@ const PetFoodAccessories = () => {
                     </TableCell>
                     <TableCell align="left">{row.stock_id}</TableCell>
                     <TableCell align="left">{row.stock_type}</TableCell>
-                    <TableCell align="left">{row.thresvalue}</TableCell>
+                    <TableCell align="left">{row?.thresvalue + row?.units}</TableCell>
                     <TableCell align="left">
-                      {row?.thresvalue + row?.units}
+                      {row?.price }
                     </TableCell>
                     <TableCell align="left">{row.avail_qty}</TableCell>
                     <TableCell>
-                      <Actionbutton />
+                      <Actionbutton fun={handleaction} data={row}/>
                     </TableCell>
                   </TableRow>
                 ))}

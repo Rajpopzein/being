@@ -10,6 +10,8 @@ import UserDetailsslice from "../slice/UserDetailsslice";
 import { county, states,district } from "../slice/countryslice";
 import { address_slices } from "../slice/Address";
 import { feedbackslices } from "../slice/FeedBackSlice";
+import { postgetapi } from "../slice/GetAllpost";
+import { category } from "../slice/Categoryslice";
 
 
 
@@ -41,6 +43,8 @@ const store = configureStore({
         district : district,
         address: address_slices,
         feedback: feedbackslices,
+        getpostapi: postgetapi,
+        getcategory : category,
         
     } 
 })

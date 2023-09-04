@@ -37,6 +37,7 @@ import feedback from '../resource/Web - Menu/Feedbacks.png'
 import Users from "./Users";
 import Feedback from "./Feedback";
 import Userdetails from "./UserDetails";
+import jwt_decode from 'jwt-decode'
 // import { useNavigate } from "react-router-dom";
 
 
@@ -95,10 +96,69 @@ export default function PersistentDrawerLeft({children}) {
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pageSelector.page);
 
+  const refreshAccessToken = () => {
+    // Implement your token refresh logic here, e.g., make an API request
+    // Update the accessToken state with the new token
+    // setAccessToken(newAccessToken);
+    const  refreshToke = localStorage.getItem("refresh_token")
+    localStorage.setItem("token", refreshToke)
+  };
+
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/");
     }
+
+    const handleActivity = () => {
+      // Check if the token is present
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        try {
+          const decodedToken = jwt_decode(token);
+
+          if (decodedToken.exp) {           
+            const currentTimestamp = Math.floor(Date.now() / 1000);
+            const remainingTime = decodedToken.exp - currentTimestamp;
+            const refreshThreshold = 60;
+
+            if (remainingTime < refreshThreshold) {
+              console.log("Token is about to expire. Initiating token refresh.");
+              refreshAccessToken();
+            } else {
+              console.log("Token is still valid");
+            }
+          } else {
+            console.log("Token does not have an expiration claim");
+          }
+        } catch (error) {
+          console.error("Error decoding the token:", error);
+          // Handle the error, e.g., show an error message to the user
+          // You might also consider navigating to the login page
+          navigate("/");
+        }
+      } else {
+        console.log("Token not found in storage");
+        // Redirect to the login page since there's no token
+        navigate("/");
+      }
+    };
+
+    window.addEventListener("mousemove", handleActivity);
+    window.addEventListener("keydown", handleActivity);
+    handleActivity();
+
+    const checkInterval = setInterval(() => {
+      handleActivity();
+    }, 300000);
+
+    return () => {
+      window.removeEventListener("mousemove", handleActivity);
+      window.removeEventListener("keydown", handleActivity);
+      clearInterval(checkInterval);
+    };
+
   }, []);
 
   const navigate = useNavigate();
@@ -357,16 +417,7 @@ export default function PersistentDrawerLeft({children}) {
       </Drawer>
       <Main open={open} sx={{ paddingTop: "3rem" }}>
         <DrawerHeader />
-        {/* {pages === 0 && <DashboardItem />}
-        {pages === 1 && <OrdersPage />}
-        {pages === 2 && <PostPage />}
-        {pages === 3 && <AdsPage />}
-        {pages === 4 && <PetFoodAccessories />}
-        {pages === 5 && <Users />}
-        {pages === 6 && <Feedback />}
-        {pages === 7 && <Userdetails/>} */}
         {children}
-        
       </Main>
     </Box>
   );

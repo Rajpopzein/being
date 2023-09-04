@@ -1,0 +1,21 @@
+.productdeatil_list p{
+    font-size: 1.1rem;
+    color: rgb(182, 181, 181);
+}
+
+.deffont{
+    font-size: 1.1rem;
+    color: rgb(182, 181, 181);
+}
+.listvalue{
+    color: rgb(98, 98, 98);
+}
+.Discription_sec .title{
+    font-size: 1.1rem;
+    color: #000;
+    font-weight: bold ;
+}
+.Discription_sec .discard{
+    padding: 3rem !important;
+    background-color: #f5f3f6;
+}
