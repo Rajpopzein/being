@@ -13,7 +13,7 @@ const AddUser = () => {
     <PersistentDrawerLeft>
       <Arrowbutton navigation={"/users"} />
       <h2>Add User</h2>
-      <Card sx={{ padding: "3rem" }}>
+      <Card sx={{ padding: "3rem" }} className="cardborder">
         {/* <UserForm/> */}
         <UserFormFormik/>
       </Card>

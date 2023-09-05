@@ -160,3 +160,8 @@
   .iframe-container:hover::after {
     opacity: 1;
   }
+
+  .cardborder{
+    margin-top: 1rem;
+    box-shadow: 1px 10px 10px 10px rgba(189, 195, 199,0.5) !important;
+  }

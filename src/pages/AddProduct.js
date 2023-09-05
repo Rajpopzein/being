@@ -19,6 +19,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import '../pages/commonStyle.css'
 
 const AddProduct = () => {
   const [image, setImage] = useState(null);
@@ -61,7 +62,7 @@ const AddProduct = () => {
     <PersistentDrawerLeft>
       <Arrowbutton navigation={"/foodandaccessories"} />
       <h3>Add Product</h3>
-      <Card sx={{ padding: "2rem" }}>
+      <Card sx={{ padding: "2rem"}} className="cardborder">
         <Formik
           initialValues={{
             image: "",

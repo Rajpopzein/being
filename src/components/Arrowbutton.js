@@ -16,13 +16,23 @@ function Arrowbutton({ navigation }) {
       onClick={handleclick}
       style={{
         cursor: "pointer",
-        border: "1px solid #000",
+        // border: "1px solid ",
+        padding:'5px',
         width: "8rem",
         marginBottom: "1.2rem",
-        borderRadius:'20px'
+        borderRadius: "20px",
+        backgroundColor: "lightgray",
+        
       }}
     >
-      <div style={{display:'flex', margin:'10px',marginBottom:'-3px', marginLeft:'15px'}}>
+      <div
+        style={{
+          display: "flex",
+          margin: "10px",
+          marginBottom: "-2px",
+          marginLeft: "15px",
+        }}
+      >
         <ArrowBackIcon />
         <h4>Back</h4>
       </div>

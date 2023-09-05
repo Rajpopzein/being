@@ -11,6 +11,7 @@ import {
   Button,
   AvatarGroup,
   Avatar,
+  FormControl,
 } from "@mui/material";
 import { getCategory } from "../redux/slice/Categoryslice";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,8 +26,26 @@ import { VideoCameraBack } from "@mui/icons-material";
 import CustomButton from "../components/Custombutton";
 // import { readFile } from 'fs/promises';
 import { Formik } from "formik";
-import * as yup from "yup";
+import * as Yup from "yup";
 import axios from "axios";
+
+const schemas = Yup.object().shape({
+  category_id: Yup.string().required("Select Category"),
+  gender: Yup.string().required("Select Gender"),
+  pet_name: Yup.string("Enter a pet name")
+    .min(1, "Name should be valid")
+    .required("Pet name required"),
+  mobile_number: Yup.number("must be a number")
+    .required("Enter the mobilenumber")
+    .max(12, "enter a valid mobile number")
+    .min(10, "enter a valid mobile number"),
+  breed: Yup.string().required("Select a bread"),
+  kcireg: Yup.string().required("Select the Kci "),
+  color: Yup.string().required("Enter color"),
+  price: Yup.string().required("enter the price"),
+  age: Yup.number("age must be number").required("age required"),
+  location: Yup.string("Location").required("Location required"),
+});
 
 const Addpost = () => {
   const dispatch = useDispatch();
@@ -83,7 +102,6 @@ const Addpost = () => {
     setImages(updatedImages);
   };
 
-
   const handleVideo = (e) => {
     const selectedFiles = e.target.files;
 
@@ -101,27 +119,6 @@ const Addpost = () => {
     }
   };
 
-  const schemas = yup.object().shape({
-    Category: yup.string().required("Select Category"),
-    Gender: yup.string().required("Select Gender"),
-    Pet_name: yup.string("Enter a pet name").min(1, "Name should be valid"),
-    Number: yup
-      .number("must be a number")
-      .required("Enter the mobilenumber")
-      .max(12, "enter a valid mobile number")
-      .min(10, "enter a valid mobile number"),
-    Description: "",
-    Bread: yup.string().required("Select a bread"),
-    KCI: yup.string().required("Select the Kci "),
-    Colour: "",
-    Price: yup.string().required("enter the price"),
-    Age: "",
-    Location: "",
-    petImages: "",
-    petVideo: "",
-    KciDocs: "",
-  });
-
   useEffect(() => {
     dispatch(getCategory());
   }, []);
@@ -130,8 +127,9 @@ const Addpost = () => {
   return (
     <PersistentDrawerLeft>
       <Arrowbutton navigation={"/post"} />
+      <h3>Add Post</h3>
       <div>
-        <Card sx={{ padding: "2.5rem" }}>
+        <Card sx={{ padding: "2.5rem" }} className="cardborder">
           <Formik
             initialValues={{
               category_id: "",
@@ -149,7 +147,7 @@ const Addpost = () => {
               video: video,
               kci_cert: kci,
             }}
-
+            validationSchema={schemas}
             onSubmit={async (e) => {
               // console.log("eve",e)
               const payload_data = {
@@ -183,110 +181,169 @@ const Addpost = () => {
                   columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 >
                   <Grid item xs={6}>
-                    <InputLabel id="Category">Category</InputLabel>
-                    <Select
-                      sx={{ width: "80%" }}
-                      labelId="Category"
-                      id="Category"
-                      value={values?.Category}
-                      name="category_id"
-                      onChange={handleChange}
-                    >
-                      {selecteddata?.map((data) => (
-                        <MenuItem
-                          key={data.category_id}
-                          value={data.category_id}
-                        >
-                          {data.category_name}
-                        </MenuItem>
-                      ))}
-                    </Select>
+                    <FormControl fullWidth>
+                      <InputLabel id="Category">Category *</InputLabel>
+                      <Select
+                        sx={{ width: "100%" }}
+                        // labelId="Category"
+                        // id="Category"
+                        fullWidth
+                        displayEmpty
+                        value={values?.Category}
+                        label="select something"
+                        name="category_id"
+                        onChange={handleChange}
+                      >
+                        {selecteddata?.map((data) => (
+                          <MenuItem
+                            key={data.category_id}
+                            value={data.category_id}
+                          >
+                            {data.category_name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.category_id}</span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
-                    <InputLabel id="Gender">Gender</InputLabel>
-                    <Select
-                      sx={{ width: "80%" }}
-                      labelId="Gender"
-                      id="Gender"
-                      // value={age}
-                      label="Gender"
-                      name="gender"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={"Male"}>Male</MenuItem>
-                      <MenuItem value={"Female"}>Female</MenuItem>
-                    </Select>
+                    <FormControl fullWidth>
+                      <InputLabel id="Gender">Gender *</InputLabel>
+                      <Select
+                        sx={{ width: "100%" }}
+                        labelId="Gender"
+                        id="Gender"
+                        // value={age}
+                        label="Gender"
+                        name="gender"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={"Male"}>Male</MenuItem>
+                        <MenuItem value={"Female"}>Female</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.gender}</span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="pet_name"
-                      label="Pet Name"
+                      label="Pet Name *"
                       variant="outlined"
                       name="pet_name"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.pet_name}</span>
+                    ) : (
+                      ""
+                    )}
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="number"
-                      label="Number"
+                      label="Number *"
                       variant="outlined"
                       name="mobile_number"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>
+                        {errors.mobile_number}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="Description"
                       label="Description"
                       variant="outlined"
                       name="description"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.description}</span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
-                    <InputLabel id="Breed">Breed</InputLabel>
-                    <Select
-                      sx={{ width: "80%" }}
-                      labelId="Breed"
-                      id="breed"
-                      // value={age}
-                      label="Breed"
-                      name="breed"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={"German"}>German</MenuItem>
-                      <MenuItem value={"Rotwiler"}>Rotwiler</MenuItem>
-                    </Select>
+                    <FormControl fullWidth sx={{marginTop:'1rem'}}>
+                      <InputLabel id="Breed">Breed *</InputLabel>
+                      <Select
+                        sx={{ width: "100%"}}
+                        labelId="Breed"
+                        id="breed"
+                        // value={age}
+                        label="Breed"
+                        name="breed"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={"German"}>German</MenuItem>
+                        <MenuItem value={"Rotwiler"}>Rotwiler</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.breed}</span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="price"
                       label="Price"
                       variant="outlined"
                       name="price"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.price}</span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="Age"
                       label="Age"
                       variant="outlined"
                       name="age"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.age}</span>
+                    ) : (
+                      ""
+                    )}
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="Location"
                       label="Location"
                       variant="outlined"
                       name="location"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.location}</span>
+                    ) : (
+                      ""
+                    )}
                     <div style={{ width: "40%", marginTop: "1rem" }}>
                       <div style={{ display: "flex" }}>
                         <p className="headingpets">Upload Images</p>
@@ -339,11 +396,12 @@ const Addpost = () => {
                     <div>
                       <InputLabel id="kci">Kci Registration</InputLabel>
                       <Select
-                        sx={{ width: "80%" }}
+                        sx={{ width: "100%" }}
                         labelId="kci"
                         id="kcireg"
                         // value={age}
                         label="Category"
+                        // label="select something"
                         name="kcireg"
                         onChange={handleChange}
                       >
@@ -351,38 +409,45 @@ const Addpost = () => {
                         <MenuItem value="No">No</MenuItem>
                       </Select>
                     </div>
-                    <div style={{ display: "flex", marginTop: "1.5rem" }}>
-                      <p className="headingpets">Attach KCI Document</p>
-                      <IconButton
-                        color="primary"
-                        component="label"
-                        style={{ marginLeft: "3rem", marginTop: "-1rem" }}
-                      >
-                        <PhotoCamera style={{ width: 30, height: 30 }} />
-                        <input
-                          type="file"
-                          style={{ display: "none" }}
-                          accept="image/*"
-                          multiple
-                          onChange={handleKciChange}
-                        />
-                      </IconButton>
-                    </div>
+                    {values.kcireg == "Yes" ? (
+                      <div style={{ display: "flex", marginTop: "1.5rem" }}>
+                        <p className="headingpets">Attach KCI Document</p>
+                        <IconButton
+                          color="primary"
+                          component="label"
+                          style={{ marginLeft: "3rem", marginTop: "-1rem" }}
+                        >
+                          <PhotoCamera style={{ width: 30, height: 30 }} />
+                          <input
+                            type="file"
+                            style={{ display: "none" }}
+                            accept="image/*"
+                            multiple
+                            onChange={handleKciChange}
+                          />
+                        </IconButton>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      sx={{ width: "80%", marginTop: "1rem" }}
+                      sx={{ width: "100%", marginTop: "1rem" }}
                       id="color"
                       label="Color"
                       variant="outlined"
                       name="color"
                       onChange={handleChange}
                     />
+                    {errors ? (
+                      <span style={{ color: "red" }}>{errors.color}</span>
+                    ) : (
+                      ""
+                    )}
                   </Grid>
-                  <Grid item xs={6}></Grid>
-                  <Grid item xs={6}></Grid>
-                </Grid>{" "}
-                <div style={{ display: "flex" }}>
+                </Grid>
+                <div style={{ display: "flex", marginTop: "1.5rem" }}>
                   <CustomButton
                     name={"Cancle"}
                     style={{
