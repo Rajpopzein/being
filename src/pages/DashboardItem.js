@@ -178,7 +178,7 @@ const Returnfunction = ({ userdata, fullname, dashboardData, userdatass }) => {
                     <Avatars avadata={userdatass?.userdata?.orderAddedBy} />
                   </div>
                   <div className="collection-button" style={{marginLeft:'-33px'}}>
-                    <button><h5>View All</h5></button>
+                    <button onClick={()=>{navigate("/orders")}}><h5>View All</h5></button>
                   </div>
                 </div>
               </Card>

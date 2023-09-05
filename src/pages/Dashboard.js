@@ -15,35 +15,35 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pawimg from "../resource/Web - Menu/pawprint.png";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import DashboardItem from "./DashboardItem";
 import { useDispatch } from "react-redux";
 import { selecterchange } from "../redux/slice/pageselectionSlice";
-import OrdersPage from "./OrdersPage";
-import ads from "../resource/Web - Menu/Ads.png";
 import post from "../resource/Web - Menu/posts.png";
-import order from "../resource/Web - Menu/Orders.png"
-import dashboard from "../resource/Web - Menu/Dashboard.png"
-import AdsPage from "./AdsPage";
-import PostPage from "./PostPage";
-import PetFoodAccessories from "./PetFoodAccessories";
-import petFood from '../resource/Web - Menu/Food&accessories.png';
-import users from '../resource/Web - Menu/Users.png';
-import feedback from '../resource/Web - Menu/Feedbacks.png'
-import Users from "./Users";
-import Feedback from "./Feedback";
-import Userdetails from "./UserDetails";
-import jwt_decode from 'jwt-decode'
+import order from "../resource/Web - Menu/Orders.png";
+import dashboard from "../resource/Web - Menu/Dashboard.png";
+import petFood from "../resource/Web - Menu/Food&accessories.png";
+import users from "../resource/Web - Menu/Users.png";
+import feedback from "../resource/Web - Menu/Feedbacks.png";
+import NavItem from "../components/navItem";
+import jwt_decode from "jwt-decode";
+import { Button, Menu } from "@mui/material";
 // import { useNavigate } from "react-router-dom";
+import { Dropdown } from "rsuite";
 
+import chatimg from "../resource/Web - Menu/chat.png";
+import notificationimg from "../resource/Web - Menu/Notification2.png";
+import { Avatar, MenuItem, Select } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 
 const pageSelectionHandler = (dispatch, value) => {
   dispatch(selecterchange(value));
 };
+
+
+
 
 const drawerWidth = 300;
 
@@ -92,18 +92,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft({children}) {
+export default function PersistentDrawerLeft({ children }) {
+
   const dispatch = useDispatch();
   const pages = useSelector((state) => state.pageSelector.page);
+  const userdata = useSelector((state) => state.userdetails);
+  const profilepic =  userdata?.datas[0]?.profile_pic
+  
 
   const refreshAccessToken = () => {
-    // Implement your token refresh logic here, e.g., make an API request
-    // Update the accessToken state with the new token
-    // setAccessToken(newAccessToken);
-    const  refreshToke = localStorage.getItem("refresh_token")
-    localStorage.setItem("token", refreshToke)
+    const refreshToke = localStorage.getItem("refresh_token");
+    localStorage.setItem("token", refreshToke);
   };
-
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -118,13 +118,15 @@ export default function PersistentDrawerLeft({children}) {
         try {
           const decodedToken = jwt_decode(token);
 
-          if (decodedToken.exp) {           
+          if (decodedToken.exp) {
             const currentTimestamp = Math.floor(Date.now() / 1000);
             const remainingTime = decodedToken.exp - currentTimestamp;
             const refreshThreshold = 60;
 
             if (remainingTime < refreshThreshold) {
-              console.log("Token is about to expire. Initiating token refresh.");
+              console.log(
+                "Token is about to expire. Initiating token refresh."
+              );
               refreshAccessToken();
             } else {
               console.log("Token is still valid");
@@ -158,7 +160,6 @@ export default function PersistentDrawerLeft({children}) {
       window.removeEventListener("keydown", handleActivity);
       clearInterval(checkInterval);
     };
-
   }, []);
 
   const navigate = useNavigate();
@@ -178,6 +179,18 @@ export default function PersistentDrawerLeft({children}) {
     setOpen(false);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(true);
+  const opens = Boolean(anchorEl);
+
+  const handleClickmenu = (event) => {
+    setAnchorEl(true);
+    console.log("clicking");
+  };
+
+  const handleClosemenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -192,23 +205,71 @@ export default function PersistentDrawerLeft({children}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ color: "#000" }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
           >
-            <img
-              src={pawimg}
-              alt="pawimg"
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ color: "#000", marginTop: "3px" }}
+            >
+              <img
+                src={pawimg}
+                alt="pawimg"
+                style={{
+                  width: "1.7rem",
+                  height: "1.7rem",
+                  marginRight: "0.7rem",
+                }}
+              />
+              <span style={{ marginTop: "1rem" }}>Pet Store</span>
+            </Typography>
+            <div
+              className="nav-items"
               style={{
-                width: "1.7rem",
-                height: "1.7rem",
-                marginRight: "0.7rem",
+                width: "35%",
+                display: "flex",
+                justifyContent: "space-evenly",
               }}
-            />
-            <span style={{ marginTop: "1rem" }}>pet store</span>
-          </Typography>
+            >
+              <NavItem img={chatimg} Title="Chat" />
+              <NavItem img={notificationimg} Title="Notification" />
+              <div style={{ display: "flex" }}>
+                <Avatar src={`https://demo.emeetify.com:5016/${profilepic}`} alt="profile" />
+                <div>
+                  <Button
+                    id="basic-button"
+                    aria-controls={opens ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={opens ? "true" : undefined}
+                    // onClick={handleClickmenu}
+                    onClick={()=>{localStorage.clear()}}
+                  >
+                    Logout
+                  </Button>
+                  {/* <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    sx={{position:'absolute'}}
+                    // open={ope}
+                    onClose={handleClosemenu}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem  onClick={handleClosemenu}>Profile</MenuItem>
+                    <MenuItem onClick={handleClosemenu}>My account</MenuItem>
+                    <MenuItem onClick={handleClosemenu}>Logout</MenuItem>
+                  </Menu> */}
+                </div>
+              </div>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -248,10 +309,18 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => {navigate("/Dashboard");pageSelectionHandler(dispatch, 0)}}
+              onClick={() => {
+                navigate("/Dashboard");
+                pageSelectionHandler(dispatch, 0);
+              }}
             >
               <ListItemIcon>
-              <img src={dashboard}  style={{height:"20px",width:"20px"}} className="sideImage" alt="DashboardImg" />
+                <img
+                  src={dashboard}
+                  style={{ height: "20px", width: "20px" }}
+                  className="sideImage"
+                  alt="DashboardImg"
+                />
               </ListItemIcon>
               <ListItemText primary={"Dashboard"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
@@ -270,10 +339,18 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => {navigate('/orders');pageSelectionHandler(dispatch, 1)}}
+              onClick={() => {
+                navigate("/orders");
+                pageSelectionHandler(dispatch, 1);
+              }}
             >
               <ListItemIcon>
-              <img src={order}  style={{height:"20px",width:"20px"}} className="sideImage" alt="OrderImg" />
+                <img
+                  src={order}
+                  style={{ height: "20px", width: "20px" }}
+                  className="sideImage"
+                  alt="OrderImg"
+                />
               </ListItemIcon>
               <ListItemText primary={"Orders"} sx={{ marginLeft: "-10%" }} />
             </ListItemButton>
@@ -292,12 +369,15 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => {navigate("/post");pageSelectionHandler(dispatch, 2)}}
+              onClick={() => {
+                navigate("/post");
+                pageSelectionHandler(dispatch, 2);
+              }}
             >
               <ListItemIcon>
                 <img
                   src={post}
-                  style={{ height: "20px", width: "20px"}}
+                  style={{ height: "20px", width: "20px" }}
                   className="sideImage"
                   alt="PostImg"
                 />
@@ -346,7 +426,10 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => {navigate("/foodandaccessories");pageSelectionHandler(dispatch, 4)}}
+              onClick={() => {
+                navigate("/foodandaccessories");
+                pageSelectionHandler(dispatch, 4);
+              }}
             >
               <ListItemIcon>
                 <img
@@ -356,7 +439,10 @@ export default function PersistentDrawerLeft({children}) {
                   alt="petFoodImg"
                 />
               </ListItemIcon>
-              <ListItemText primary={"Pet Food & Accessories"} sx={{ marginLeft: "-10%" }} />
+              <ListItemText
+                primary={"Pet Food & Accessories"}
+                sx={{ marginLeft: "-10%" }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{ margin: "25px 0px" }}>
@@ -373,7 +459,10 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => {navigate("/users"); pageSelectionHandler(dispatch, 5)}}
+              onClick={() => {
+                navigate("/users");
+                pageSelectionHandler(dispatch, 5);
+              }}
             >
               <ListItemIcon>
                 <img
@@ -400,7 +489,10 @@ export default function PersistentDrawerLeft({children}) {
                     }
                   : {}
               }
-              onClick={() => {navigate('/feedback');pageSelectionHandler(dispatch, 6)}}
+              onClick={() => {
+                navigate("/feedback");
+                pageSelectionHandler(dispatch, 6);
+              }}
             >
               <ListItemIcon>
                 <img
