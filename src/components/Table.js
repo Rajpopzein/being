@@ -224,7 +224,7 @@ export default function DataTable({ data, columns, index , clickfun}) {
                 </TableBody>
               )}
               
-              <TableFooter>
+              <TableFooter sx={{width:'150%', float:'left'}}>
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[

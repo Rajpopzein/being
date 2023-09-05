@@ -252,7 +252,7 @@ const UserFormFormik = ({ userdatas }) => {
             onSubmit={
               userdatas !== undefined
                 ? (e) => handleupdate(e, props.values)
-                : (e) => handlesubmit(e, props.values)
+                : props.errors.length == 0 ? (e) => handlesubmit(e, props.values) : ""
             }
           >
             <div style={{ marginLeft: "3rem" }}>
@@ -595,7 +595,6 @@ const UserFormFormik = ({ userdatas }) => {
         <Alert severity="success" sx={{ width: '150%' }}>
           User updated 
         </Alert>
-        
       </Snackbar>
     </div>
   );
